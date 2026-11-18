@@ -1,0 +1,16 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": ["AGENTS.md"],
+  "permissions": [
+    { "action": "shell", "resource": "rm -rf *", "effect": "ask" },
+    { "action": "shell", "resource": "git push *", "effect": "ask" },
+    { "action": "shell", "resource": "npm publish *", "effect": "deny" }
+  ],
+  "agents": {
+    "build": {
+      "permissions": [
+        { "action": "skill", "resource": "*", "effect": "allow" }
+      ]
+    }
+  }
+}
