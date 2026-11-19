@@ -1,0 +1,115 @@
+import { cn } from "@/lib/utils";
+
+export function Container({
+  children,
+  className,
+  size = "default",
+}: {
+  children: React.ReactNode;
+  className?: string;
+  size?: "default" | "wide" | "narrow";
+}) {
+  return (
+    <div
+      className={cn(
+        "mx-auto w-full px-5 sm:px-8",
+        size === "default" && "max-w-6xl",
+        size === "wide" && "max-w-7xl",
+        size === "narrow" && "max-w-3xl",
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
+}
+
+export function Section({
+  children,
+  className,
+  tone = "default",
+  as: Tag = "section",
+  id,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  tone?: "default" | "paper" | "card" | "ink";
+  as?: "section" | "div" | "footer" | "article";
+  id?: string;
+}) {
+  return (
+    <Tag
+      id={id}
+      className={cn(
+        "py-16 md:py-24",
+        tone === "paper" && "bg-grain",
+        tone === "card" && "bg-card",
+        tone === "ink" && "bg-ink text-ink-foreground",
+        className,
+      )}
+    >
+      {children}
+    </Tag>
+  );
+}
+
+export function Eyebrow({
+  children,
+  className,
+  tone = "brand",
+}: {
+  children: React.ReactNode;
+  className?: string;
+  tone?: "brand" | "muted" | "light";
+}) {
+  return (
+    <p
+      className={cn(
+        "flex items-center gap-3 text-[0.68rem] font-medium uppercase tracking-[0.22em]",
+        tone === "brand" && "text-brand-foreground/70",
+        tone === "muted" && "text-muted-foreground",
+        tone === "light" && "text-ink-foreground/70",
+        className,
+      )}
+    >
+      <span aria-hidden="true" className="h-px w-8 bg-current opacity-60" />
+      {children}
+    </p>
+  );
+}
+
+export function SectionHeading({
+  eyebrow,
+  title,
+  body,
+  align = "start",
+  className,
+  titleClassName,
+}: {
+  eyebrow?: string;
+  title: string;
+  body?: string;
+  align?: "start" | "center";
+  className?: string;
+  titleClassName?: string;
+}) {
+  return (
+    <div
+      className={cn(
+        "flex flex-col gap-4",
+        align === "center" && "items-center text-center",
+        className,
+      )}
+    >
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+      <h2 className={cn("text-3xl leading-[1.07] sm:text-[2.6rem] lg:text-[2.9rem]", titleClassName)}>
+        {title}
+      </h2>
+      {body && (
+        <p className="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-[1.05rem]">
+          {body}
+        </p>
+      )}
+    </div>
+  );
+}
