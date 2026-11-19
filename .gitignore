@@ -40,3 +40,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw product mockups — multi-GB studio sources, not needed by the build
+/public/MOCKUPS/
