@@ -43,3 +43,6 @@ next-env.d.ts
 
 # raw product mockups — multi-GB studio sources, not needed by the build
 /public/MOCKUPS/
+
+# raw brand artwork — full-resolution exports; generated icons are committed
+/assets/brand/

@@ -54,8 +54,8 @@ function NavLinks({ lang, pathname }: { lang: Lang; pathname: string }) {
               href={href}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "relative inline-flex items-center gap-1 whitespace-nowrap px-2.5 py-2 text-[0.8125rem] font-medium transition-colors",
-                "after:pointer-events-none after:absolute after:inset-x-2.5 after:-bottom-px after:h-0.5 after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-200",
+                "relative inline-flex items-center gap-1 whitespace-nowrap px-2 py-2 text-[0.78rem] font-medium transition-colors xl:px-2.5 xl:text-[0.8125rem]",
+                "after:pointer-events-none after:absolute after:inset-x-2 after:-bottom-px after:h-0.5 after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-200 xl:after:inset-x-2.5",
                 active
                   ? "text-primary after:scale-x-100"
                   : "text-foreground/70 hover:text-foreground hover:after:scale-x-100 hover:after:bg-primary/40",
@@ -249,7 +249,7 @@ export function SiteHeader({ lang }: { lang: Lang }) {
             className="w-fit rounded-md transition-opacity hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
             aria-label={lang === "fr" ? "La Table de Grand-Mère — Accueil" : "La Table de Grand-Mère — Home"}
           >
-            <Logo />
+            <Logo priority />
           </Link>
 
           {/* Centered navigation */}
@@ -274,7 +274,7 @@ export function SiteHeader({ lang }: { lang: Lang }) {
 
             <Link
               href={paths.contact[lang]}
-              className="hidden h-10 items-center gap-2 rounded-full bg-primary px-5 text-[0.8125rem] font-semibold text-primary-foreground transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#9d2b22] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring md:inline-flex"
+              className="hidden h-10 items-center gap-2 rounded-full bg-primary px-5 text-[0.8125rem] font-semibold text-primary-foreground transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#9d2b22] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring md:inline-flex lg:hidden xl:inline-flex"
             >
               {nav[lang].find((item) => item.key === "contact")?.label}
             </Link>
