@@ -135,7 +135,7 @@ function MobileMenu({
           aria-label={lang === "fr" ? "La Table de Grand-Mère — Accueil" : "La Table de Grand-Mère — Home"}
           className="rounded-md"
         >
-          <Logo />
+          <Logo className="h-16" />
         </Link>
         <button
           type="button"
@@ -247,7 +247,7 @@ export function SiteHeader({ lang }: { lang: Lang }) {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-md">
       <Container size="wide">
-        <div className="grid h-[72px] grid-cols-[1fr_auto] items-center gap-6 lg:h-20 lg:grid-cols-[auto_1fr_auto]">
+        <div className="grid h-24 grid-cols-[1fr_auto] items-center gap-6 lg:h-28 lg:grid-cols-[auto_1fr_auto]">
           {/* Logo */}
           <Link
             href={paths.home[lang]}

@@ -39,5 +39,5 @@ export function Logo({
   priority?: boolean;
   alt?: string;
 }) {
-  return <LogoMark alt={alt} priority={priority} className={cn("h-14 sm:h-16", className)} />;
+  return <LogoMark alt={alt} priority={priority} className={cn("h-20 sm:h-24", className)} />;
 }
