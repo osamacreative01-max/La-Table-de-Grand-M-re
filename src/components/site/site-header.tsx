@@ -129,7 +129,12 @@ function MobileMenu({
       className="fixed inset-0 z-50 flex flex-col bg-background lg:hidden"
     >
       <div className="flex items-center justify-between gap-4 border-b border-border px-5 py-4">
-        <Link href={paths.home[lang]} onClick={onClose} className="rounded-md">
+        <Link
+          href={paths.home[lang]}
+          onClick={onClose}
+          aria-label={lang === "fr" ? "La Table de Grand-Mère — Accueil" : "La Table de Grand-Mère — Home"}
+          className="rounded-md"
+        >
           <Logo />
         </Link>
         <button

@@ -38,7 +38,7 @@ export function SiteFooter({ lang }: { lang: Lang }) {
       <Container size="wide" className="py-16 md:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr_1fr]">
           <div className="max-w-sm">
-            <Logo tone="inverse" showTagline />
+            <Logo alt="La Table de Grand-Mère" className="h-20" />
             <p className="mt-5 font-heading text-xl leading-snug text-ink-foreground/85">
               {brand.line[lang]}
             </p>
