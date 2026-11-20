@@ -14,7 +14,7 @@ export function Container({
       className={cn(
         "mx-auto w-full px-5 sm:px-8",
         size === "default" && "max-w-6xl",
-        size === "wide" && "max-w-7xl",
+        size === "wide" && "max-w-[1200px]",
         size === "narrow" && "max-w-3xl",
         className,
       )}
@@ -41,7 +41,7 @@ export function Section({
     <Tag
       id={id}
       className={cn(
-        "py-16 md:py-24",
+        "py-14 md:py-24",
         tone === "paper" && "bg-grain",
         tone === "card" && "bg-card",
         tone === "ink" && "bg-ink text-ink-foreground",
@@ -65,14 +65,14 @@ export function Eyebrow({
   return (
     <p
       className={cn(
-        "flex items-center gap-3 text-[0.68rem] font-medium uppercase tracking-[0.22em]",
-        tone === "brand" && "text-brand-foreground/70",
+        "flex items-center gap-3 text-[0.75rem] font-semibold uppercase tracking-[0.12em]",
+        tone === "brand" && "text-primary",
         tone === "muted" && "text-muted-foreground",
-        tone === "light" && "text-ink-foreground/70",
+        tone === "light" && "text-ink-foreground/80",
         className,
       )}
     >
-      <span aria-hidden="true" className="h-px w-8 bg-current opacity-60" />
+      <span aria-hidden="true" className="h-px w-6 bg-current opacity-70" />
       {children}
     </p>
   );
@@ -102,11 +102,11 @@ export function SectionHeading({
       )}
     >
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-      <h2 className={cn("text-3xl leading-[1.07] sm:text-[2.6rem] lg:text-[2.9rem]", titleClassName)}>
+      <h2 className={cn("text-[1.875rem] leading-[1.08] sm:text-[2.5rem]", titleClassName)}>
         {title}
       </h2>
       {body && (
-        <p className="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-[1.05rem]">
+        <p className="max-w-2xl text-[1.0625rem] leading-relaxed text-muted-foreground">
           {body}
         </p>
       )}

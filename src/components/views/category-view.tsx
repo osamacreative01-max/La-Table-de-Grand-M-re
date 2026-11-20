@@ -80,7 +80,7 @@ export function CategoryView({
               priority
               sizes="(min-width: 1024px) 40vw, 92vw"
               className="relative shadow-[0_40px_80px_-48px_rgba(72,48,28,0.55)]"
-              imageClassName="p-[4%]"
+              
             />
           </div>
         </Container>

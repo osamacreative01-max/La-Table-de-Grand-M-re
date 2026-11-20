@@ -152,9 +152,9 @@ const ratioClasses = {
 } as const;
 
 /**
- * A warm "product stage": real photography blends into the cream surface with
- * `mix-blend-multiply`, and products without a photo fall back to a designed
- * pantry label instead of an empty placeholder.
+ * A warm "product stage": real product cut-outs sit on a tinted surface, and
+ * products without a photo fall back to a designed pantry label instead of an
+ * empty placeholder.
  */
 export function MediaFrame({
   src,
@@ -221,7 +221,7 @@ export function MediaFrame({
           sizes={sizes}
           priority={priority}
           className={cn(
-            "object-contain p-[7%] mix-blend-multiply transition-transform duration-700 ease-out",
+            "object-contain p-[4%] drop-shadow-[0_16px_22px_rgb(43_33_24/0.16)] transition-transform duration-700 ease-out",
             imageClassName,
           )}
         />

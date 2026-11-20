@@ -1,9 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
+  // Product shots are already cropped, resized and encoded to WebP by
+  // scripts/optimize-product-images.mjs, and they carry an alpha channel that
+  // the on-demand optimizer would flatten to JPEG. Serve them as-is.
+  images: { unoptimized: true },
   turbopack: {
     rules: {
       "*.css": {

@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ChevronRight, Leaf, ShoppingBag, Users } from "lucide-react";
+import { ArrowRight, Check, Leaf, ShoppingBag, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container, Eyebrow, Section, SectionHeading } from "@/components/site/primitives";
 import { ProductCard, RecipeCard } from "@/components/site/cards";
 import { ProductStage } from "@/components/site/product-stage";
 import { businessSubnav, home, recipesPage, ui } from "@/content/copy";
 import { categories, products } from "@/content/catalog";
-import { categoryPath, paths, productPath } from "@/lib/routes";
+import { paths, productPath } from "@/lib/routes";
 import type { Lang } from "@/content/types";
 
 const subHref: Record<string, Record<Lang, string>> = {
@@ -37,102 +37,64 @@ export function HomeView({ lang }: { lang: Lang }) {
     <main id="main">
       {/* ── A — HERO ──────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-grain-rich">
-        <div className="pointer-events-none absolute inset-0 bg-dots opacity-40" aria-hidden="true" />
+        {/* Soft warmth in the corners */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-32 -top-32 size-[520px] rounded-full"
-          style={{
-            background:
-              "radial-gradient(circle, oklch(0.88 0.06 78 / 0.18) 0%, transparent 70%)",
-          }}
+          className="pointer-events-none absolute -right-40 -top-40 size-[560px] rounded-full bg-[radial-gradient(circle,rgb(217_164_65/0.16),transparent_68%)]"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-20 -left-24 size-[380px] rounded-full"
-          style={{
-            background:
-              "radial-gradient(circle, oklch(0.85 0.045 60 / 0.12) 0%, transparent 70%)",
-          }}
+          className="pointer-events-none absolute -bottom-32 -left-32 size-[420px] rounded-full bg-[radial-gradient(circle,rgb(181_54_43/0.07),transparent_70%)]"
         />
 
         <Container
           size="wide"
-          className="relative grid items-center gap-12 py-14 lg:grid-cols-[1.02fr_0.98fr] lg:gap-16 lg:py-24"
+          className="relative grid items-center gap-12 py-14 md:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:py-24"
         >
-          <div className="max-w-2xl animate-fade-up">
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-brand/40 bg-brand-soft/60 px-4 py-1.5 text-[0.68rem] font-medium uppercase tracking-[0.2em] text-brand-foreground/75">
-              <span aria-hidden="true" className="size-1.5 rounded-full bg-brand" />
-              {copy.eyebrow}
-            </div>
+          <div className="max-w-[34rem] animate-fade-up">
+            <Eyebrow>{copy.eyebrow}</Eyebrow>
 
-            <h1 className="mt-7 text-[2.7rem] leading-[1.02] tracking-[-0.025em] sm:text-[3.6rem] lg:text-[4.5rem]">
+            <h1 className="mt-6 text-[2.375rem] font-semibold leading-[1.05] tracking-[-0.02em] sm:text-[3rem] lg:text-[3.5rem]">
               {copy.hero.title}
             </h1>
 
-            <p className="mt-6 max-w-md text-[1.05rem] leading-relaxed text-muted-foreground">
+            <p className="mt-6 max-w-[30rem] text-[1.0625rem] leading-relaxed text-muted-foreground sm:text-[1.125rem]">
               {copy.hero.body}
             </p>
 
-            <div className="mt-9 flex flex-wrap items-center gap-4">
-              <Button
-                size="xl"
-                render={<Link href={paths.products[lang]} />}
-                className="bg-primary shadow-lg shadow-primary/20 hover:shadow-primary/30"
-              >
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+              <Button size="xl" nativeButton={false} render={<Link href={paths.products[lang]} />}>
                 {copy.hero.cta}
                 <ArrowRight className="size-4" aria-hidden="true" />
               </Button>
-              <Link
-                href={paths.story[lang]}
-                className="group inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
-              >
+              <Button variant="outline" size="xl" nativeButton={false} render={<Link href={paths.story[lang]} />}>
                 {lang === "fr" ? "Notre histoire" : "Our Story"}
-                <ChevronRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-              </Link>
+              </Button>
             </div>
 
-            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border/60 pt-7">
+            <ul className="mt-10 flex flex-wrap gap-2.5">
               {(lang === "fr"
                 ? ["Produits de qualité", "Recettes inspirantes", "Fait pour la famille"]
                 : ["Quality products", "Inspiring recipes", "Made for families"]
               ).map((item) => (
-                <span
+                <li
                   key={item}
-                  className="flex items-center gap-2 text-xs font-medium text-muted-foreground"
+                  className="inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-3.5 py-1.5 text-[0.75rem] font-medium text-foreground/75"
                 >
                   <span
                     aria-hidden="true"
-                    className="inline-flex size-5 items-center justify-center rounded-full border border-brand/50 bg-brand-soft/70"
+                    className="inline-flex size-4 items-center justify-center rounded-full bg-olive text-cream"
                   >
-                    <span className="size-1.5 rounded-full bg-brand" />
+                    <Check className="size-2.5" strokeWidth={3} />
                   </span>
                   {item}
-                </span>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
 
-          <ProductStage lang={lang} priority className="animate-scale-in" />
+          <ProductStage lang={lang} priority className="animate-fade-up [animation-delay:120ms]" />
         </Container>
-
-        {/* Range strip */}
-        <div className="relative border-t border-border/60 bg-card/60">
-          <Container size="wide" className="flex flex-wrap items-center gap-x-6 gap-y-2 py-4">
-            <span className="text-[0.6rem] font-semibold uppercase tracking-[0.22em] text-brand-foreground/70">
-              {lang === "fr" ? "Nos gammes" : "Our ranges"}
-            </span>
-            <span aria-hidden="true" className="hidden h-4 w-px bg-border/80 sm:block" />
-            {categories.map((category) => (
-              <Link
-                key={category.key}
-                href={categoryPath(lang, category.slug[lang])}
-                className="text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
-              >
-                {category.name[lang]}
-              </Link>
-            ))}
-          </Container>
-        </div>
       </section>
 
       {/* ── B — PANTRY FAVOURITES ─────────────────────────────────── */}
@@ -148,7 +110,7 @@ export function HomeView({ lang }: { lang: Lang }) {
             <Button
               variant="outline"
               size="lg"
-              render={<Link href={paths.products[lang]} />}
+              nativeButton={false} render={<Link href={paths.products[lang]} />}
               className="shrink-0"
             >
               {copy.collections.cta}
@@ -228,7 +190,7 @@ export function HomeView({ lang }: { lang: Lang }) {
                     width={1029}
                     height={1277}
                     sizes="(min-width: 1024px) 40vw, 90vw"
-                    className="absolute left-1/2 top-1/2 h-[112%] w-auto max-w-none -translate-x-1/2 -translate-y-1/2 mix-blend-multiply drop-shadow-[0_24px_28px_rgba(72,48,28,0.16)]"
+                    className="absolute left-1/2 top-1/2 h-[112%] w-auto max-w-none -translate-x-1/2 -translate-y-1/2 drop-shadow-[0_24px_28px_rgba(72,48,28,0.16)]"
                   />
                 </div>
                 <blockquote className="absolute -bottom-5 right-4 hidden max-w-[13rem] rounded-2xl border border-brand/30 bg-card/95 px-4 py-3 shadow-xl backdrop-blur-sm sm:block">
@@ -286,7 +248,7 @@ export function HomeView({ lang }: { lang: Lang }) {
             <Button
               variant="outline"
               size="lg"
-              render={<Link href={paths.recipes[lang]} />}
+              nativeButton={false} render={<Link href={paths.recipes[lang]} />}
               className="shrink-0"
             >
               {copy.recipes.cta}
@@ -327,7 +289,7 @@ export function HomeView({ lang }: { lang: Lang }) {
                 <Button
                   size="xl"
                   className="border border-ink-foreground/20 bg-ink-foreground text-ink shadow-lg shadow-black/25 hover:bg-ink-foreground/92"
-                  render={<Link href={paths.business[lang]} />}
+                  nativeButton={false} render={<Link href={paths.business[lang]} />}
                 >
                   {copy.business.cta}
                   <ArrowRight className="size-4" aria-hidden="true" />

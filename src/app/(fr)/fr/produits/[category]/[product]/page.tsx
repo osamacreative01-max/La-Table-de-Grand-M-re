@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { ProductView } from "@/components/views/product-view";
+import { PageSkeleton } from "@/components/site/page-skeleton";
 import { categories, products } from "@/content/catalog";
 import { buildMetadata } from "@/lib/metadata";
 import { paths } from "@/lib/routes";
+
+type PageProps = { params: Promise<{ category: string; product: string }> };
 
 export function generateStaticParams() {
   return categories.flatMap((category) =>
@@ -28,9 +32,7 @@ function resolve(categorySlug: string, productSlug: string) {
 
 export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ category: string; product: string }>;
-}): Promise<Metadata> {
+}: PageProps): Promise<Metadata> {
   const { category: categorySlug, product: productSlug } = await params;
   const found = resolve(categorySlug, productSlug);
   if (!found) return {};
@@ -43,11 +45,15 @@ export async function generateMetadata({
   });
 }
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ category: string; product: string }>;
-}) {
+export default function Page({ params }: PageProps) {
+  return (
+    <Suspense fallback={<PageSkeleton />}>
+      <ProductPage params={params} />
+    </Suspense>
+  );
+}
+
+async function ProductPage({ params }: PageProps) {
   const { category: categorySlug, product: productSlug } = await params;
   const found = resolve(categorySlug, productSlug);
   if (!found) notFound();

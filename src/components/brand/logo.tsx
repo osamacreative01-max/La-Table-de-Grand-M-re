@@ -57,13 +57,16 @@ export function Logo({
 }) {
   return (
     <span className={cn("flex items-center gap-2.5 sm:gap-3", className)}>
-      <LogoMark className="size-9 shrink-0 text-brand sm:size-11" />
+      <LogoMark className="size-9 shrink-0 text-primary sm:size-11" />
       <span className="flex flex-col leading-none">
-        <span className="font-heading text-[1rem] tracking-[-0.01em] sm:text-[1.1rem]">
-          La Table de Grand-Mère
+        <span className="text-[0.58rem] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+          La Table de
+        </span>
+        <span className="mt-1 font-heading text-[1.15rem] font-semibold leading-none tracking-[-0.02em] text-foreground sm:text-[1.3rem]">
+          Grand-Mère
         </span>
         {showTagline && (
-          <span className="mt-1 text-[0.6rem] uppercase tracking-[0.26em] text-muted-foreground">
+          <span className="mt-1.5 text-[0.56rem] uppercase tracking-[0.22em] text-primary">
             Québec · depuis toujours
           </span>
         )}

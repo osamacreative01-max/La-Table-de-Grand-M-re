@@ -207,7 +207,6 @@ export function LanguageSwitcher({
         )}
       >
         <Globe className="size-3.5" aria-hidden="true" />
-        <span className="hidden sm:inline">{labels.translate}</span>
         <ChevronDown
           className={cn("size-3 transition-transform", open && "rotate-180")}
           aria-hidden="true"

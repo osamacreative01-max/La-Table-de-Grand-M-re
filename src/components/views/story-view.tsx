@@ -85,11 +85,11 @@ export function StoryView({ lang }: { lang: Lang }) {
 
           {/* CTAs */}
           <div className="mt-10 flex flex-wrap gap-3">
-            <Button size="xl" render={<Link href={paths.products[lang]} />}
+            <Button size="xl" nativeButton={false} render={<Link href={paths.products[lang]} />}
               className="shadow-md shadow-primary/15">
               {lang === "fr" ? "Découvrir nos produits" : "Discover Our Products"}
             </Button>
-            <Button size="xl" variant="outline" render={<Link href={paths.recipes[lang]} />}>
+            <Button size="xl" variant="outline" nativeButton={false} render={<Link href={paths.recipes[lang]} />}>
               {lang === "fr" ? "Voir les recettes" : "See Recipes"}
             </Button>
           </div>

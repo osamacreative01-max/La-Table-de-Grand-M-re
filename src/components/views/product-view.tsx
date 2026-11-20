@@ -88,7 +88,7 @@ export function ProductView({
                 priority
                 sizes="(min-width: 1024px) 42vw, 92vw"
                 className="relative shadow-[0_48px_96px_-50px_rgba(72,48,28,0.55)]"
-                imageClassName="p-[5%]"
+                
               />
             </div>
 
@@ -127,7 +127,7 @@ export function ProductView({
                   <div className="mt-5 flex flex-wrap gap-3">
                     <Button
                       size="lg"
-                      render={<Link href={paths.business[lang]} />}
+                      nativeButton={false} render={<Link href={paths.business[lang]} />}
                       className="shadow-sm shadow-primary/15"
                     >
                       {copy.businessCta}
@@ -136,6 +136,7 @@ export function ProductView({
                     <Button
                       size="lg"
                       variant="ghost"
+                      nativeButton={false}
                       render={
                         <Link href={`${paths.products[lang]}/${category.slug[lang]}`} />
                       }

@@ -66,7 +66,7 @@ export function BuyerView({ lang, page }: { lang: Lang; page: BuyerKey }) {
               </div>
 
               <div className="mt-8">
-                <Button size="xl" render={<Link href="#enquiry" />}
+                <Button size="xl" nativeButton={false} render={<Link href="#enquiry" />}
                   className="shadow-md shadow-primary/15">
                   {copy.cta}
                   <ArrowRight className="size-4" aria-hidden="true" />
@@ -89,7 +89,7 @@ export function BuyerView({ lang, page }: { lang: Lang; page: BuyerKey }) {
                 priority
                 sizes="(min-width: 1024px) 42vw, 92vw"
                 className="relative shadow-[0_32px_64px_-32px_rgba(72,48,28,0.55)]"
-                imageClassName="p-[4%]"
+                
               />
             </div>
           </div>
