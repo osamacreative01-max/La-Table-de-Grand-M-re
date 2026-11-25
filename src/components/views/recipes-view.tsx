@@ -4,14 +4,25 @@ import { RecipeCard } from "@/components/site/cards";
 import { MediaFrame } from "@/components/site/media-frame";
 import { recipesPage } from "@/content/copy";
 import { categories, products } from "@/content/catalog";
+import { recipes } from "@/content/recipes";
+import { recipeCardProps } from "@/lib/recipes";
 import { productPath } from "@/lib/routes";
 import type { Lang } from "@/content/types";
 
-const tones = ["sage", "wheat", "linen", "clay", "cocoa", "honey"] as const;
+const pantryKeys = [
+  "peches-en-morceaux",
+  "pois-chiches",
+  "sardines-sauce-tomate",
+  "beurre-darachide-croquant",
+  "palourdes-entieres-cuites",
+  "salade-de-fruits",
+];
 
 export function RecipesView({ lang }: { lang: Lang }) {
   const copy = recipesPage[lang];
-  const pantry = products.filter((product) => product.image).slice(0, 6);
+  const pantry = pantryKeys
+    .map((key) => products.find((product) => product.key === key && product.image))
+    .filter((product): product is NonNullable<typeof product> => Boolean(product));
 
   return (
     <main id="main">
@@ -43,14 +54,9 @@ export function RecipesView({ lang }: { lang: Lang }) {
       <Section className="pt-10 md:pt-14">
         <Container size="wide">
           <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {copy.cards.map((card, index) => (
-              <li key={card.title}>
-                <RecipeCard
-                  title={card.title}
-                  caption={card.caption}
-                  tone={tones[index]}
-                  index={index}
-                />
+            {recipes.map((recipe, index) => (
+              <li key={recipe.key}>
+                <RecipeCard {...recipeCardProps(recipe, lang, index)} />
               </li>
             ))}
           </ul>

@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Container, Eyebrow, Section, SectionHeading } from "@/components/site/primitives";
 import { ProductCard, RecipeCard } from "@/components/site/cards";
 import { ProductStage } from "@/components/site/product-stage";
-import { businessSubnav, home, recipesPage, ui } from "@/content/copy";
+import { businessSubnav, home, ui } from "@/content/copy";
 import { categories, products } from "@/content/catalog";
+import { recipes } from "@/content/recipes";
+import { recipeCardProps } from "@/lib/recipes";
 import { paths, productPath } from "@/lib/routes";
 import type { Lang } from "@/content/types";
 
@@ -19,10 +21,10 @@ const subHref: Record<string, Record<Lang, string>> = {
 const businessIcons = [ShoppingBag, Users, Leaf];
 
 const featuredKeys = [
-  "legumes-melanges",
-  "haricots-rouges",
-  "pois-chiches",
-  "mais-en-creme",
+  "peches-en-moities",
+  "sardines-sauce-tomate",
+  "nouilles-poulet-epice",
+  "beurre-darachide-croquant",
 ];
 
 export function HomeView({ lang }: { lang: Lang }) {
@@ -31,7 +33,7 @@ export function HomeView({ lang }: { lang: Lang }) {
   const featured = featuredKeys
     .map((key) => products.find((product) => product.key === key))
     .filter((product): product is NonNullable<typeof product> => Boolean(product));
-  const recipeCards = recipesPage[lang].cards.slice(0, 3);
+  const recipeCards = recipes.slice(0, 3);
 
   return (
     <main id="main">
@@ -40,11 +42,11 @@ export function HomeView({ lang }: { lang: Lang }) {
         {/* Soft warmth in the corners */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-40 -top-40 size-[560px] rounded-full bg-[radial-gradient(circle,rgb(217_164_65/0.16),transparent_68%)]"
+          className="pointer-events-none absolute -right-40 -top-40 size-[560px] rounded-full bg-[radial-gradient(circle,rgb(200_164_92/0.18),transparent_68%)]"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-32 -left-32 size-[420px] rounded-full bg-[radial-gradient(circle,rgb(181_54_43/0.07),transparent_70%)]"
+          className="pointer-events-none absolute -bottom-32 -left-32 size-[420px] rounded-full bg-[radial-gradient(circle,rgb(124_29_36/0.07),transparent_70%)]"
         />
 
         <Container
@@ -181,14 +183,14 @@ export function HomeView({ lang }: { lang: Lang }) {
                     className="absolute left-1/2 top-[9%] h-[80%] w-[56%] -translate-x-1/2 rounded-t-[999px] border border-brand/25 bg-brand-soft/40"
                   />
                   <Image
-                    src="/products/whole-peeled-tomatoes.webp"
+                    src="/products/cherries.webp"
                     alt={
                       lang === "fr"
-                        ? "Tomates entières pelées La Table de Grand-Mère"
-                        : "La Table de Grand-Mère whole peeled tomatoes"
+                        ? "Cerises La Table de Grand-Mère"
+                        : "La Table de Grand-Mère cherries"
                     }
-                    width={1029}
-                    height={1277}
+                    width={691}
+                    height={1000}
                     sizes="(min-width: 1024px) 40vw, 90vw"
                     className="absolute left-1/2 top-1/2 h-[112%] w-auto max-w-none -translate-x-1/2 -translate-y-1/2 drop-shadow-[0_24px_28px_rgba(72,48,28,0.16)]"
                   />
@@ -257,14 +259,9 @@ export function HomeView({ lang }: { lang: Lang }) {
           </div>
 
           <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {recipeCards.map((card, index) => (
-              <li key={card.title}>
-                <RecipeCard
-                  title={card.title}
-                  caption={card.caption}
-                  tone={["sage", "wheat", "linen"][index] as "sage" | "wheat" | "linen"}
-                  index={index}
-                />
+            {recipeCards.map((recipe, index) => (
+              <li key={recipe.key}>
+                <RecipeCard {...recipeCardProps(recipe, lang, index)} />
               </li>
             ))}
           </ul>

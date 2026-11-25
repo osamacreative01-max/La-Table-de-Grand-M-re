@@ -48,5 +48,9 @@ export function productPath(
   return `${paths.products[lang]}/${categorySlug}/${productSlug}`;
 }
 
+export function recipePath(lang: Lang, recipeSlug: string): string {
+  return `${paths.recipes[lang]}/${recipeSlug}`;
+}
+
 /** The equivalent page in the other language, for the FR/EN switch. */
 export const otherLang: Record<Lang, Lang> = { fr: "en", en: "fr" };

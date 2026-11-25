@@ -1,4 +1,5 @@
 import { categories, products } from "@/content/catalog";
+import { recipes } from "@/content/recipes";
 import { paths } from "@/lib/routes";
 import type { Lang } from "@/content/types";
 
@@ -69,6 +70,11 @@ export function alternatePath(pathname: string, to: Lang): string {
     if (!product) return `${paths.products[to]}/${category.slug[to]}`;
 
     return `${paths.products[to]}/${category.slug[to]}/${product.slug[to]}`;
+  }
+
+  if (key === "recipes" && segments[1]) {
+    const recipe = recipes.find((item) => item.slug[from] === segments[1]);
+    return recipe ? `${paths.recipes[to]}/${recipe.slug[to]}` : paths.recipes[to];
   }
 
   if (key === "business" && segments[1]) {

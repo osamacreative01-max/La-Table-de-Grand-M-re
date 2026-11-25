@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { categories, products } from "@/content/catalog";
+import { recipes } from "@/content/recipes";
 import { paths } from "@/lib/routes";
 import { siteUrl } from "@/lib/metadata";
 
@@ -38,6 +39,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     pairs.push({
       fr: `${paths.products.fr}/${category.slug.fr}/${product.slug.fr}`,
       en: `${paths.products.en}/${category.slug.en}/${product.slug.en}`,
+      priority: 0.5,
+    });
+  }
+
+  for (const recipe of recipes) {
+    pairs.push({
+      fr: `${paths.recipes.fr}/${recipe.slug.fr}`,
+      en: `${paths.recipes.en}/${recipe.slug.en}`,
       priority: 0.5,
     });
   }

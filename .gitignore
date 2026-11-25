@@ -46,3 +46,9 @@ next-env.d.ts
 
 # raw brand artwork — full-resolution exports; generated icons are committed
 /assets/brand/
+
+# raw client handoff (PDF portfolios, fruit mockups) — optimised copies live in public/products
+/public/new deta/
+
+# local Claude preview config
+/.claude/

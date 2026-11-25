@@ -279,7 +279,7 @@ export function SiteHeader({ lang }: { lang: Lang }) {
 
             <Link
               href={paths.contact[lang]}
-              className="hidden h-10 items-center gap-2 rounded-full bg-primary px-5 text-[0.8125rem] font-semibold text-primary-foreground transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#9d2b22] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring md:inline-flex lg:hidden xl:inline-flex"
+              className="hidden h-10 items-center gap-2 rounded-full bg-primary px-5 text-[0.8125rem] font-semibold text-primary-foreground transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#65171d] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring md:inline-flex lg:hidden xl:inline-flex"
             >
               {nav[lang].find((item) => item.key === "contact")?.label}
             </Link>

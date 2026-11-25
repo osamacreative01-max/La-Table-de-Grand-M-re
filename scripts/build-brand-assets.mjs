@@ -23,7 +23,7 @@ const APPLE_ICON_OUTPUT = "src/app/apple-icon.png";
 const ICO_OUTPUT = "src/app/favicon.ico";
 
 /** Cream page background, used behind the opaque iOS icon. */
-const ICON_BACKGROUND = "#f7f2e9";
+const ICON_BACKGROUND = "#faf5ea";
 
 /** Drops the transparent (and near-transparent) margin around the badge. */
 async function trimmedBadge() {

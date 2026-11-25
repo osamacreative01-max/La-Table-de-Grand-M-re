@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, ChefHat, Clock } from "lucide-react";
 import { FoodIllustration, MediaFrame, toneStyles } from "@/components/site/media-frame";
@@ -195,15 +196,26 @@ export function RecipeCard({
   tone,
   note,
   index = 0,
+  href,
+  summary,
+  label,
+  image,
+  imageAlt,
 }: {
   title: string;
   caption: string;
   tone: Tone;
   note?: string;
   index?: number;
+  href?: string;
+  summary?: string;
+  label?: string;
+  /** Product shot shown in the corner of the illustration. */
+  image?: string;
+  imageAlt?: string;
 }) {
-  return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card transition-all duration-300 hover:-translate-y-1 hover:border-brand/40 hover:shadow-[0_22px_48px_-22px_rgba(72,48,28,0.45)]">
+  const body = (
+    <>
       <div
         className="relative aspect-[4/3] overflow-hidden"
         style={{ backgroundImage: recipeTones[tone] }}
@@ -227,23 +239,76 @@ export function RecipeCard({
           className="absolute right-6 top-6 size-5 text-foreground/35"
           aria-hidden="true"
         />
-        <p className="absolute inset-x-6 bottom-5 text-[0.62rem] font-medium uppercase tracking-[0.18em] text-foreground/55">
+        {image && (
+          <Image
+            src={image}
+            alt={imageAlt ?? ""}
+            width={160}
+            height={160}
+            className="absolute bottom-3 right-4 size-24 object-contain drop-shadow-[0_14px_18px_rgba(72,48,28,0.35)] transition-transform duration-500 group-hover:-rotate-3 group-hover:scale-105 sm:size-28"
+          />
+        )}
+        <p
+          className={cn(
+            "absolute bottom-5 left-6 text-[0.62rem] font-medium uppercase tracking-[0.18em] text-foreground/55",
+            image ? "right-32" : "right-6",
+          )}
+        >
           {caption}
         </p>
       </div>
       <div className="flex flex-1 flex-col gap-2 p-6">
-        <h3 className="text-xl leading-snug">{title}</h3>
-        {note && (
-          <div className="mt-auto flex items-center gap-1.5 pt-3">
-            <Clock className="size-3 text-muted-foreground/60" aria-hidden="true" />
-            <p className="text-[0.65rem] uppercase tracking-[0.16em] text-muted-foreground">
-              {note}
-            </p>
+        <h3 className="text-xl leading-snug transition-colors group-hover:text-brand-foreground">
+          {title}
+        </h3>
+        {summary && (
+          <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">{summary}</p>
+        )}
+        {(note || label) && (
+          <div className="mt-auto flex items-center justify-between gap-3 pt-3">
+            {note ? (
+              <span className="flex items-center gap-1.5">
+                <Clock className="size-3 text-muted-foreground/60" aria-hidden="true" />
+                <span className="text-[0.65rem] uppercase tracking-[0.16em] text-muted-foreground">
+                  {note}
+                </span>
+              </span>
+            ) : (
+              <span />
+            )}
+            {label && (
+              <span className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-foreground/80 transition-colors group-hover:text-foreground">
+                {label}
+                <ArrowRight
+                  className="size-3.5 transition-transform group-hover:translate-x-0.5"
+                  aria-hidden="true"
+                />
+              </span>
+            )}
           </div>
         )}
       </div>
-    </article>
+    </>
   );
+
+  const shell =
+    "group flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card transition-all duration-300 hover:-translate-y-1 hover:border-brand/40 hover:shadow-[0_22px_48px_-22px_rgba(72,48,28,0.45)]";
+
+  if (href) {
+    return (
+      <Link
+        href={href}
+        className={cn(
+          shell,
+          "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
+        )}
+      >
+        {body}
+      </Link>
+    );
+  }
+
+  return <article className={shell}>{body}</article>;
 }
 
 export function BusinessCard({

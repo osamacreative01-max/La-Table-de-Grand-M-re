@@ -1,15 +1,17 @@
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Check, Sparkles, UtensilsCrossed } from "lucide-react";
+import { ArrowLeft, ArrowRight, Snowflake, UtensilsCrossed } from "lucide-react";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { Container, Section, Eyebrow } from "@/components/site/primitives";
 import { MediaFrame } from "@/components/site/media-frame";
-import { ProductCard } from "@/components/site/cards";
+import { ProductCard, RecipeCard } from "@/components/site/cards";
 import { Button } from "@/components/ui/button";
 import { JsonLd, breadcrumbSchema, productSchema } from "@/components/site/json-ld";
-import { productPage, productsPage, ui } from "@/content/copy";
+import { productPage, productsPage, recipePage, ui } from "@/content/copy";
 import { products, categories } from "@/content/catalog";
+import { recipes, recipesForProduct } from "@/content/recipes";
 import { paths, productPath } from "@/lib/routes";
 import { absolute } from "@/lib/metadata";
+import { recipeCardProps } from "@/lib/recipes";
 import type { Category, Product, Lang } from "@/content/types";
 
 export function ProductView({
@@ -34,10 +36,15 @@ export function ProductView({
     ),
   ].slice(0, 3);
 
-  const highlights =
-    lang === "fr"
-      ? ["Prêt à servir", "Garde-manger pratique", "Pour toute la famille"]
-      : ["Ready to serve", "Pantry convenient", "For the whole family"];
+  const usedIn = recipesForProduct(product.key);
+
+  const detailFields: { label: string; value: string }[] = [];
+  if (product.format) {
+    detailFields.push({ label: copy.formatLabel, value: product.format[lang] });
+  }
+  if (product.netWeight) {
+    detailFields.push({ label: copy.weightLabel, value: product.netWeight });
+  }
 
   return (
     <main id="main">
@@ -88,7 +95,6 @@ export function ProductView({
                 priority
                 sizes="(min-width: 1024px) 42vw, 92vw"
                 className="relative shadow-[0_48px_96px_-50px_rgba(72,48,28,0.55)]"
-                
               />
             </div>
 
@@ -101,20 +107,44 @@ export function ProductView({
                 {product.description[lang]}
               </p>
 
-              <ul className="mt-7 flex flex-wrap gap-2">
-                {highlights.map((item, index) => {
-                  const Icon = index === 1 ? Sparkles : index === 2 ? UtensilsCrossed : Check;
-                  return (
-                    <li
-                      key={item}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-secondary/40 px-3.5 py-1.5 text-xs font-medium text-foreground/75"
+              {detailFields.length > 0 && (
+                <dl className="mt-8 flex flex-wrap gap-3">
+                  {detailFields.map((field) => (
+                    <div
+                      key={field.label}
+                      className="min-w-[9.5rem] rounded-xl border border-border/70 bg-card px-5 py-3.5"
                     >
-                      <Icon className="size-3.5 text-brand-foreground/70" aria-hidden="true" />
-                      {item}
-                    </li>
-                  );
-                })}
-              </ul>
+                      <dt className="text-[0.6rem] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                        {field.label}
+                      </dt>
+                      <dd className="mt-1 font-medium text-foreground">{field.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
+
+              {product.storage && (
+                <p className="mt-3 inline-flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                  <Snowflake className="size-3.5 text-brand-foreground/70" aria-hidden="true" />
+                  {product.storage[lang]}
+                </p>
+              )}
+
+              {product.serving && (
+                <div className="mt-4 flex items-start gap-3.5 rounded-2xl border border-brand/25 bg-brand-soft/40 px-5 py-4">
+                  <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full border border-brand/25 bg-card">
+                    <UtensilsCrossed className="size-4 text-brand-foreground/75" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <p className="text-[0.6rem] font-medium uppercase tracking-[0.18em] text-brand-foreground/70">
+                      {copy.servingLabel}
+                    </p>
+                    <p className="mt-1 font-heading text-lg leading-snug text-foreground">
+                      {product.serving[lang]}
+                    </p>
+                  </div>
+                </div>
+              )}
 
               <div className="mt-10 overflow-hidden rounded-2xl border border-border/70 bg-card shadow-sm">
                 <div className="border-b border-border/60 px-6 py-5">
@@ -150,6 +180,21 @@ export function ProductView({
           </div>
         </Container>
       </Section>
+
+      {usedIn.length > 0 && (
+        <Section className="pt-0 md:pt-0">
+          <Container size="wide">
+            <Eyebrow>{recipePage[lang].withProduct}</Eyebrow>
+            <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {usedIn.map((recipe) => (
+                <li key={recipe.key}>
+                  <RecipeCard {...recipeCardProps(recipe, lang, recipes.indexOf(recipe))} />
+                </li>
+              ))}
+            </ul>
+          </Container>
+        </Section>
+      )}
 
       {related.length > 0 && (
         <Section tone="card" className="border-y border-border/60">
