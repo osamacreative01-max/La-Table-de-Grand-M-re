@@ -4,7 +4,6 @@ import { JsonLd, breadcrumbSchema } from "@/components/site/json-ld";
 import { categories, products } from "@/content/catalog";
 import { productsPage, ui } from "@/content/copy";
 import { categoryPath, paths } from "@/lib/routes";
-import { cn } from "@/lib/utils";
 import { absolute } from "@/lib/metadata";
 import type { Lang } from "@/content/types";
 
@@ -59,22 +58,15 @@ export function ProductsView({ lang }: { lang: Lang }) {
 
       <Section className="pt-6 md:pt-8">
         <Container size="wide">
-          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {categories.map((category, index) => (
-              <li
-                key={category.key}
-                className={cn(
-                  index === categories.length - 1 &&
-                    "sm:col-span-2 lg:col-span-3",
-                )}
-              >
+              <li key={category.key}>
                 <CategoryCard
                   category={category}
                   lang={lang}
                   href={categoryPath(lang, category.slug[lang])}
                   label={t.seeProducts}
                   index={index}
-                  wide={index === categories.length - 1}
                 />
               </li>
             ))}

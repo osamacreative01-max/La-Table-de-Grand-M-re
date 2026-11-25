@@ -1,13 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check, Leaf, ShoppingBag, Users } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowRight, Leaf, ShoppingBag, Users } from "lucide-react";
+import { CategoryMarquee } from "@/components/home/category-marquee";
+import { HeroSlider, type HeroSlide } from "@/components/home/hero-slider";
+import { Carousel } from "@/components/motion/carousel";
+import { Reveal } from "@/components/motion/reveal";
+import { CategoryCard, ProductCard, RecipeCard } from "@/components/site/cards";
 import { Container, Eyebrow, Section, SectionHeading } from "@/components/site/primitives";
-import { ProductCard, RecipeCard } from "@/components/site/cards";
-import { ProductStage } from "@/components/site/product-stage";
-import { businessSubnav, home, recipesPage, ui } from "@/content/copy";
+import { Button } from "@/components/ui/button";
 import { categories, products } from "@/content/catalog";
-import { paths, productPath } from "@/lib/routes";
+import { banners, businessSubnav, home, recipesPage, ui } from "@/content/copy";
+import { recipes } from "@/content/recipes";
+import { recipeCardProps } from "@/lib/recipes";
+import { categoryPath, paths, productPath } from "@/lib/routes";
 import type { Lang } from "@/content/types";
 
 const subHref: Record<string, Record<Lang, string>> = {
@@ -19,88 +24,99 @@ const subHref: Record<string, Record<Lang, string>> = {
 const businessIcons = [ShoppingBag, Users, Leaf];
 
 const featuredKeys = [
-  "legumes-melanges",
-  "haricots-rouges",
-  "pois-chiches",
-  "mais-en-creme",
+  "lentilles-rouges-fendues",
+  "poulet",
+  "nouilles-poulet-epice",
+  "beurre-darachide-croquant",
 ];
+
+const sliderLabels = {
+  fr: {
+    region: "À la une",
+    previous: "Précédent",
+    next: "Suivant",
+    pause: "Mettre le diaporama en pause",
+    play: "Relancer le diaporama",
+    goTo: "Aller à la diapositive",
+  },
+  en: {
+    region: "Featured",
+    previous: "Previous",
+    next: "Next",
+    pause: "Pause the slideshow",
+    play: "Play the slideshow",
+    goTo: "Go to slide",
+  },
+} as const;
+
+function heroSlides(lang: Lang): HeroSlide[] {
+  const copy = home[lang];
+  const banner = banners[lang];
+  return [
+    {
+      image: "/images/hero-family-table.webp",
+      alt: banner.heroAlt,
+      eyebrow: copy.eyebrow,
+      title: copy.hero.title,
+      body: copy.hero.body,
+      primary: { href: paths.products[lang], label: copy.hero.cta },
+      secondary: { href: paths.story[lang], label: lang === "fr" ? "Notre histoire" : "Our Story" },
+      theme: "dark",
+      align: "left",
+      focus: "70% center",
+    },
+    {
+      image: "/images/banner-product-range.webp",
+      alt: banner.rangeAlt,
+      eyebrow: banner.rangeEyebrow,
+      title: banner.rangeTitle,
+      body: banner.rangeBody,
+      primary: { href: paths.products[lang], label: banner.rangeCta },
+      secondary: { href: paths.business[lang], label: ui[lang].business },
+      theme: "dark",
+      align: "left",
+      focus: "80% center",
+    },
+    {
+      image: "/images/hero-recipes.webp",
+      alt: banner.recipesAlt,
+      eyebrow: lang === "fr" ? "Idées repas" : "Meal ideas",
+      title: recipesPage[lang].kicker,
+      body: recipesPage[lang].intro,
+      primary: { href: paths.recipes[lang], label: copy.recipes.cta },
+      theme: "light",
+      align: "right",
+      focus: "18% center",
+    },
+  ];
+}
 
 export function HomeView({ lang }: { lang: Lang }) {
   const copy = home[lang];
   const t = ui[lang];
+  const labels = sliderLabels[lang];
   const featured = featuredKeys
     .map((key) => products.find((product) => product.key === key))
     .filter((product): product is NonNullable<typeof product> => Boolean(product));
-  const recipeCards = recipesPage[lang].cards.slice(0, 3);
+
+  const stats = [
+    { value: categories.length, label: lang === "fr" ? "gammes" : "ranges" },
+    { value: products.length, label: lang === "fr" ? "produits" : "products" },
+    { value: recipes.length, label: lang === "fr" ? "recettes" : "recipes" },
+  ];
 
   return (
     <main id="main">
-      {/* ── A — HERO ──────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-grain-rich">
-        {/* Soft warmth in the corners */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-40 -top-40 size-[560px] rounded-full bg-[radial-gradient(circle,rgb(217_164_65/0.16),transparent_68%)]"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -bottom-32 -left-32 size-[420px] rounded-full bg-[radial-gradient(circle,rgb(181_54_43/0.07),transparent_70%)]"
-        />
+      {/* ── A — HERO SLIDER ───────────────────────────────────────── */}
+      <HeroSlider slides={heroSlides(lang)} labels={labels} />
 
-        <Container
-          size="wide"
-          className="relative grid items-center gap-12 py-14 md:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:py-24"
-        >
-          <div className="max-w-[34rem] animate-fade-up">
-            <Eyebrow>{copy.eyebrow}</Eyebrow>
-
-            <h1 className="mt-6 text-[2.375rem] font-semibold leading-[1.05] tracking-[-0.02em] sm:text-[3rem] lg:text-[3.5rem]">
-              {copy.hero.title}
-            </h1>
-
-            <p className="mt-6 max-w-[30rem] text-[1.0625rem] leading-relaxed text-muted-foreground sm:text-[1.125rem]">
-              {copy.hero.body}
-            </p>
-
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-              <Button size="xl" nativeButton={false} render={<Link href={paths.products[lang]} />}>
-                {copy.hero.cta}
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </Button>
-              <Button variant="outline" size="xl" nativeButton={false} render={<Link href={paths.story[lang]} />}>
-                {lang === "fr" ? "Notre histoire" : "Our Story"}
-              </Button>
-            </div>
-
-            <ul className="mt-10 flex flex-wrap gap-2.5">
-              {(lang === "fr"
-                ? ["Produits de qualité", "Recettes inspirantes", "Fait pour la famille"]
-                : ["Quality products", "Inspiring recipes", "Made for families"]
-              ).map((item) => (
-                <li
-                  key={item}
-                  className="inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-3.5 py-1.5 text-[0.75rem] font-medium text-foreground/75"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="inline-flex size-4 items-center justify-center rounded-full bg-olive text-cream"
-                  >
-                    <Check className="size-2.5" strokeWidth={3} />
-                  </span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <ProductStage lang={lang} priority className="animate-fade-up [animation-delay:120ms]" />
-        </Container>
-      </section>
+      {/* ── A2 — RANGES TICKER ────────────────────────────────────── */}
+      <CategoryMarquee lang={lang} />
 
       {/* ── B — PANTRY FAVOURITES ─────────────────────────────────── */}
-      <Section tone="card" className="border-y border-border/60">
+      <Section tone="card">
         <Container size="wide">
-          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <Reveal className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionHeading
               eyebrow={lang === "fr" ? "Le garde-manger" : "The pantry"}
               title={copy.collections.title}
@@ -110,135 +126,138 @@ export function HomeView({ lang }: { lang: Lang }) {
             <Button
               variant="outline"
               size="lg"
-              nativeButton={false} render={<Link href={paths.products[lang]} />}
+              nativeButton={false}
+              render={<Link href={paths.products[lang]} />}
               className="shrink-0"
             >
               {copy.collections.cta}
               <ArrowRight className="size-4" aria-hidden="true" />
             </Button>
-          </div>
+          </Reveal>
 
           <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {featured.map((product) => {
+            {featured.map((product, index) => {
               const category = categories.find((item) => item.key === product.category);
               if (!category) return null;
               return (
-                <li key={product.key}>
+                <Reveal as="li" key={product.key} delay={index * 0.08}>
                   <ProductCard
                     product={product}
                     lang={lang}
                     href={productPath(lang, category.slug[lang], product.slug[lang])}
                     label={t.viewProduct}
                     eyebrow={category.name[lang]}
+                    photo
                   />
-                </li>
+                </Reveal>
               );
             })}
           </ul>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 rounded-2xl border border-border/50 bg-secondary/30 px-6 py-4 text-sm text-muted-foreground">
-            <p>
-              <span className="font-heading text-xl font-medium text-foreground">{categories.length}</span>{" "}
-              {lang === "fr" ? "gammes de produits" : "product ranges"}
-            </p>
-            <span aria-hidden="true" className="hidden h-5 w-px bg-border/70 sm:block" />
-            <p>
-              <span className="font-heading text-xl font-medium text-foreground">{products.length}</span>{" "}
-              {lang === "fr" ? "produits" : "products"}
-            </p>
-            <span aria-hidden="true" className="hidden h-5 w-px bg-border/70 sm:block" />
-            <p>{lang === "fr" ? "Pour toute la famille" : "For the whole family"}</p>
-          </div>
+          <Reveal className="mt-12 grid grid-cols-3 divide-x divide-border/70 rounded-2xl border border-border/60 bg-background/60 py-6 text-center">
+            {stats.map((stat) => (
+              <p key={stat.label} className="px-3">
+                <span className="block font-heading text-3xl text-foreground sm:text-4xl">
+                  {stat.value}
+                </span>
+                <span className="mt-1 block text-[0.7rem] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+                  {stat.label}
+                </span>
+              </p>
+            ))}
+          </Reveal>
+        </Container>
+      </Section>
+
+      {/* ── B2 — RANGES CAROUSEL ──────────────────────────────────── */}
+      <Section tone="paper" className="border-y border-border/60">
+        <Container size="wide">
+          <Reveal>
+            <SectionHeading
+              eyebrow={lang === "fr" ? "Nos gammes" : "Our ranges"}
+              title={lang === "fr" ? "Un garde-manger complet." : "A complete pantry."}
+              body={
+                lang === "fr"
+                  ? "Huit gammes pour cuisiner au quotidien, des fruits du déjeuner aux nouilles du souper."
+                  : "Eight ranges for everyday cooking, from breakfast fruit to dinnertime noodles."
+              }
+              className="max-w-2xl"
+            />
+          </Reveal>
+          <Reveal className="mt-12">
+            <Carousel
+              label={lang === "fr" ? "Gammes de produits" : "Product ranges"}
+              previousLabel={labels.previous}
+              nextLabel={labels.next}
+            >
+              {categories.map((category, index) => (
+                <CategoryCard
+                  key={category.key}
+                  category={category}
+                  href={categoryPath(lang, category.slug[lang])}
+                  lang={lang}
+                  label={t.seeProducts}
+                  index={index}
+                />
+              ))}
+            </Carousel>
+          </Reveal>
         </Container>
       </Section>
 
       {/* ── C — BRAND STORY ───────────────────────────────────────── */}
       <Section>
         <Container size="wide">
-          <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-grain-rich">
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute right-0 top-0 h-full w-1/2 bg-lines opacity-50"
-            />
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -right-10 -top-10 size-64 rounded-full"
-              style={{
-                background:
-                  "radial-gradient(circle, oklch(0.86 0.06 76 / 0.2), transparent 70%)",
-              }}
-            />
-
-            <div className="relative grid items-center gap-10 px-7 py-10 md:px-12 md:py-14 lg:grid-cols-2 lg:gap-16">
-              <div className="relative order-last lg:order-first">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0 bg-dots opacity-40"
-                  />
-                  <div
-                    aria-hidden="true"
-                    className="absolute left-1/2 top-[9%] h-[80%] w-[56%] -translate-x-1/2 rounded-t-[999px] border border-brand/25 bg-brand-soft/40"
-                  />
-                  <Image
-                    src="/products/whole-peeled-tomatoes.webp"
-                    alt={
-                      lang === "fr"
-                        ? "Tomates entières pelées La Table de Grand-Mère"
-                        : "La Table de Grand-Mère whole peeled tomatoes"
-                    }
-                    width={1029}
-                    height={1277}
-                    sizes="(min-width: 1024px) 40vw, 90vw"
-                    className="absolute left-1/2 top-1/2 h-[112%] w-auto max-w-none -translate-x-1/2 -translate-y-1/2 drop-shadow-[0_24px_28px_rgba(72,48,28,0.16)]"
-                  />
-                </div>
-                <blockquote className="absolute -bottom-5 right-4 hidden max-w-[13rem] rounded-2xl border border-brand/30 bg-card/95 px-4 py-3 shadow-xl backdrop-blur-sm sm:block">
-                  <p className="font-heading text-sm leading-snug text-brand-foreground">
-                    {lang === "fr" ? "« Viens t'asseoir, c'est prêt! »" : '"Come sit down, it\'s ready!"'}
-                  </p>
-                </blockquote>
+          <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
+            <Reveal className="relative">
+              <div
+                aria-hidden="true"
+                className="absolute -inset-3 rounded-[2rem] border border-brand/20"
+                style={{ transform: "rotate(-1.5deg)" }}
+              />
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] shadow-[0_48px_96px_-50px_rgba(72,48,28,0.55)]">
+                <Image
+                  src="/images/hero-our-story.webp"
+                  alt={banners[lang].storyAlt}
+                  fill
+                  sizes="(min-width: 1024px) 52vw, 92vw"
+                  className="object-cover object-[80%_center]"
+                />
               </div>
-
-              <div className="max-w-lg">
-                <Eyebrow tone="muted">
-                  {lang === "fr" ? "Notre histoire" : "Our Story"}
-                </Eyebrow>
-                <h2 className="mt-5 text-3xl leading-[1.08] sm:text-[2.6rem]">
-                  {copy.story.title}
-                </h2>
-                <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-[1.05rem]">
-                  {copy.story.body}
+              <blockquote className="absolute -bottom-6 left-6 max-w-[15rem] rounded-2xl border border-brand/30 bg-card/95 px-5 py-4 shadow-xl backdrop-blur-sm">
+                <p className="font-heading text-base leading-snug text-brand-foreground">
+                  {lang === "fr" ? "« Viens t'asseoir, c'est prêt! »" : "“Come sit down, it's ready!”"}
                 </p>
+              </blockquote>
+            </Reveal>
 
-                <div className="mt-5 rounded-xl border-l-4 border-brand bg-brand-soft/40 py-3 pl-5 pr-4">
-                  <p className="font-heading text-base leading-snug text-foreground/85">
-                    {lang === "fr"
-                      ? "Le goût de se retrouver."
-                      : "The Taste of Coming Together."}
-                  </p>
-                </div>
-
-                <Link
-                  href={paths.story[lang]}
-                  className="group mt-7 inline-flex items-center gap-2 rounded-full border border-border/80 bg-card px-5 py-2.5 text-sm font-medium transition-all hover:border-brand/60 hover:bg-brand-soft/50"
-                >
-                  {copy.story.cta}
-                  <ArrowRight
-                    className="size-4 transition-transform group-hover:translate-x-0.5"
-                    aria-hidden="true"
-                  />
-                </Link>
-              </div>
-            </div>
+            <Reveal className="max-w-lg pt-4 lg:pt-0" delay={0.1}>
+              <Eyebrow>{lang === "fr" ? "Notre histoire" : "Our Story"}</Eyebrow>
+              <h2 className="mt-5 text-3xl leading-[1.08] sm:text-[2.6rem]">{copy.story.title}</h2>
+              <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-[1.05rem]">
+                {copy.story.body}
+              </p>
+              <p className="mt-6 border-l-4 border-brand pl-5 font-heading text-lg italic leading-snug text-foreground/85">
+                {lang === "fr" ? "Le goût de se retrouver." : "The Taste of Coming Together."}
+              </p>
+              <Button
+                size="lg"
+                nativeButton={false}
+                render={<Link href={paths.story[lang]} />}
+                className="mt-8"
+              >
+                {copy.story.cta}
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </Button>
+            </Reveal>
           </div>
         </Container>
       </Section>
 
-      {/* ── D — RECIPES ───────────────────────────────────────────── */}
-      <Section tone="paper" className="border-y border-border/60">
+      {/* ── D — RECIPES CAROUSEL ──────────────────────────────────── */}
+      <Section tone="card" className="border-y border-border/60">
         <Container size="wide">
-          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <Reveal className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionHeading
               eyebrow={lang === "fr" ? "Recettes" : "Recipes"}
               title={copy.recipes.title}
@@ -248,84 +267,91 @@ export function HomeView({ lang }: { lang: Lang }) {
             <Button
               variant="outline"
               size="lg"
-              nativeButton={false} render={<Link href={paths.recipes[lang]} />}
+              nativeButton={false}
+              render={<Link href={paths.recipes[lang]} />}
               className="shrink-0"
             >
               {copy.recipes.cta}
               <ArrowRight className="size-4" aria-hidden="true" />
             </Button>
-          </div>
-
-          <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {recipeCards.map((card, index) => (
-              <li key={card.title}>
-                <RecipeCard
-                  title={card.title}
-                  caption={card.caption}
-                  tone={["sage", "wheat", "linen"][index] as "sage" | "wheat" | "linen"}
-                  index={index}
-                />
-              </li>
-            ))}
-          </ul>
+          </Reveal>
+          <Reveal className="mt-12">
+            <Carousel
+              label={lang === "fr" ? "Recettes" : "Recipes"}
+              previousLabel={labels.previous}
+              nextLabel={labels.next}
+            >
+              {recipes.map((recipe, index) => (
+                <RecipeCard key={recipe.key} {...recipeCardProps(recipe, lang, index)} />
+              ))}
+            </Carousel>
+          </Reveal>
         </Container>
       </Section>
 
       {/* ── E — BUSINESS STRIP ────────────────────────────────────── */}
-      <Section tone="ink">
+      <section className="relative isolate overflow-hidden bg-ink py-16 text-ink-foreground md:py-24">
+        <Image
+          src="/images/banner-product-range.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          className="-z-20 object-cover object-[85%_center] opacity-35"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,var(--ink)_20%,color-mix(in_oklab,var(--ink)_70%,transparent)_100%)]"
+        />
         <Container size="wide">
           <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-            <div>
-              <Eyebrow tone="light">
-                {lang === "fr" ? "Professionnels" : "Business"}
-              </Eyebrow>
-              <h2 className="mt-5 text-3xl leading-[1.08] sm:text-4xl lg:text-[2.7rem]">
+            <Reveal>
+              <Eyebrow tone="light">{lang === "fr" ? "Professionnels" : "Business"}</Eyebrow>
+              <h2 className="mt-5 text-3xl leading-[1.08] text-ink-foreground sm:text-4xl lg:text-[2.7rem]">
                 {copy.business.title}
               </h2>
-              <p className="mt-5 max-w-lg text-base leading-relaxed text-ink-foreground/70 sm:text-[1.05rem]">
+              <p className="mt-5 max-w-lg text-base leading-relaxed text-ink-foreground/75 sm:text-[1.05rem]">
                 {copy.business.body}
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Button
-                  size="xl"
-                  className="border border-ink-foreground/20 bg-ink-foreground text-ink shadow-lg shadow-black/25 hover:bg-ink-foreground/92"
-                  nativeButton={false} render={<Link href={paths.business[lang]} />}
-                >
-                  {copy.business.cta}
-                  <ArrowRight className="size-4" aria-hidden="true" />
-                </Button>
-              </div>
-            </div>
+              <Button
+                size="xl"
+                className="mt-8 border border-ink-foreground/20 bg-ink-foreground text-ink shadow-lg shadow-black/25 hover:bg-ink-foreground/92"
+                nativeButton={false}
+                render={<Link href={paths.business[lang]} />}
+              >
+                {copy.business.cta}
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </Button>
+            </Reveal>
 
             <ul className="flex flex-col gap-3">
-              {businessSubnav[lang].map((child, i) => {
-                const Icon = businessIcons[i];
+              {businessSubnav[lang].map((child, index) => {
+                const Icon = businessIcons[index];
                 return (
-                  <li key={child.key}>
+                  <Reveal as="li" key={child.key} delay={index * 0.08}>
                     <Link
                       href={subHref[child.key][lang]}
-                      className="group flex items-center justify-between gap-4 rounded-2xl border border-ink-foreground/15 bg-ink-foreground/5 px-5 py-4 transition-all hover:border-ink-foreground/35 hover:bg-ink-foreground/10"
+                      className="group flex items-center justify-between gap-4 rounded-2xl border border-ink-foreground/15 bg-ink/60 px-5 py-4 backdrop-blur-sm transition-all hover:border-ink-foreground/35 hover:bg-ink-foreground/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                     >
-                      <div className="flex items-center gap-3.5">
+                      <span className="flex items-center gap-3.5">
                         <span className="flex size-9 shrink-0 items-center justify-center rounded-xl border border-ink-foreground/20 bg-ink-foreground/10">
                           <Icon className="size-4 text-ink-foreground/70" aria-hidden="true" />
                         </span>
                         <span className="text-sm font-medium text-ink-foreground/85 group-hover:text-ink-foreground">
                           {child.label}
                         </span>
-                      </div>
+                      </span>
                       <ArrowRight
                         className="size-4 shrink-0 text-ink-foreground/40 transition-transform group-hover:translate-x-0.5 group-hover:text-ink-foreground/70"
                         aria-hidden="true"
                       />
                     </Link>
-                  </li>
+                  </Reveal>
                 );
               })}
             </ul>
           </div>
         </Container>
-      </Section>
+      </section>
     </main>
   );
 }

@@ -85,3 +85,45 @@ export function productSchema({
     inLanguage: lang === "fr" ? "fr-CA" : "en-CA",
   };
 }
+
+/** Recipe structured data built from the local recipe content. */
+export function recipeSchema({
+  lang,
+  name,
+  description,
+  url,
+  image,
+  prepMinutes,
+  cookMinutes,
+  servings,
+  ingredients,
+  steps,
+}: {
+  lang: Lang;
+  name: string;
+  description: string;
+  url: string;
+  image?: string;
+  prepMinutes: number;
+  cookMinutes: number;
+  servings: number;
+  ingredients: readonly string[];
+  steps: readonly string[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Recipe",
+    name,
+    description,
+    url,
+    ...(image ? { image } : {}),
+    author: { "@id": `${siteUrl}/#organization` },
+    inLanguage: lang === "fr" ? "fr-CA" : "en-CA",
+    prepTime: `PT${prepMinutes}M`,
+    cookTime: `PT${cookMinutes}M`,
+    totalTime: `PT${prepMinutes + cookMinutes}M`,
+    recipeYield: String(servings),
+    recipeIngredient: ingredients,
+    recipeInstructions: steps.map((text) => ({ "@type": "HowToStep", text })),
+  };
+}

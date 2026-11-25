@@ -20,6 +20,10 @@
   0%, 100% { transform: translateY(0px); }
   50%       { transform: translateY(-6px); }
 }
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
 @keyframes shimmer {
   from { background-position: -200% center; }
   to   { background-position: 200% center; }
@@ -45,12 +49,14 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Brand palette: tomato red, olive green, mustard, sand and cream */
+  /* Brand palette: burgundy, antique gold, cream and charcoal */
   --color-tomato: var(--tomato);
   --color-olive: var(--olive);
   --color-mustard: var(--mustard);
   --color-sand: var(--sand);
   --color-cream: var(--cream);
+  --color-gold: var(--gold);
+  --color-gold-deep: var(--gold-deep);
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
   --color-brand-soft: var(--brand-soft);
@@ -80,14 +86,16 @@
   --radius: 1rem;
 
   /* Raw palette */
-  --cream: #f7f2e9;
-  --sand: #ede3d0;
-  --tomato: #b5362b;
-  --olive: #2f4a3a;
-  --mustard: #d9a441;
-  --ink-brown: #2b2118;
-  --muted-brown: #6b5d50;
-  --line: #e2d6c2;
+  --cream: #faf5ea;
+  --sand: #efe4d0;
+  --tomato: #7c1d24;
+  --olive: #3c4a38;
+  --mustard: #c8a45c;
+  --gold: #c8a45c;
+  --gold-deep: #a17c34;
+  --ink-brown: #241b18;
+  --muted-brown: #6b5c4f;
+  --line: #e5d8c3;
 
   --background: var(--cream);
   --foreground: var(--ink-brown);
@@ -132,7 +140,7 @@
   --popover: #241e18;
   --popover-foreground: #f5ede0;
 
-  --primary: #d05a4d;
+  --primary: #c97068;
   --primary-foreground: #1b1611;
   --secondary: #33291f;
   --secondary-foreground: #f5ede0;
@@ -148,7 +156,7 @@
   --input: rgb(255 255 255 / 18%);
   --ring: var(--mustard);
 
-  --brand: #e06a5d;
+  --brand: #c97068;
   --brand-foreground: #f5ede0;
   --brand-soft: #3a2f24;
 
@@ -252,6 +260,15 @@
 @utility animate-delay-300 { animation-delay: 300ms; }
 @utility animate-delay-400 { animation-delay: 400ms; }
 @utility animate-delay-500 { animation-delay: 500ms; }
+
+/* Category ticker on the home page: two identical rows scroll by half their width. */
+@utility marquee {
+  animation: marquee 48s linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
 
 /* Google Translate: keep the machine translation invisible except the text it rewrites */
 #google_translate_element,

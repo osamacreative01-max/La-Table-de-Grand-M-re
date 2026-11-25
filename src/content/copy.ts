@@ -108,12 +108,12 @@ export const home = {
     eyebrow: "Le goût de se retrouver",
     hero: {
       title: "Les bons moments commencent autour de la table.",
-      body: "Des aliments pour les repas du quotidien et tous ces moments qu'on aime partager.",
+      body: "Des fruits et légumes en conserve aux légumineuses, en passant par les poissons, les nouilles et les tartinades : de quoi inspirer les repas du quotidien.",
       cta: "Découvrir nos produits",
     },
     collections: {
       title: "Des essentiels pour chaque repas.",
-      body: "Des légumes en conserve au riz, en passant par les légumineuses, les pâtes et bien plus encore, découvrez de quoi inspirer vos repas de tous les jours.",
+      body: "Huit gammes pensées pour le garde-manger : fruits et légumes, haricots, légumineuses sèches, riz et nouilles, poissons et fruits de mer, viandes à lunch et beurre d'arachide.",
       cta: "Explorer nos produits",
     },
     story: {
@@ -136,12 +136,12 @@ export const home = {
     eyebrow: "The Taste of Coming Together",
     hero: {
       title: "The Best Moments Begin Around the Table.",
-      body: "Food for everyday meals and the moments we love to share.",
+      body: "From canned fruit and vegetables to pulses, seafood, noodles and spreads: everyday inspiration for the meals you share.",
       cta: "Discover Our Products",
     },
     collections: {
       title: "Everyday Essentials for Every Meal.",
-      body: "From canned vegetables and rice to legumes, pasta and more, discover everyday ingredients that inspire great meals.",
+      body: "Eight pantry ranges: fruit and vegetables, beans, dried pulses, rice and noodles, seafood, luncheon meats and peanut butter.",
       cta: "Explore Our Products",
     },
     story: {
@@ -166,13 +166,13 @@ export const productsPage = {
   fr: {
     title: "Nos produits",
     intro:
-      "De bons ingrédients pour vos repas de tous les jours. Explorez nos gammes et trouvez de nouvelles idées pour votre table.",
+      "Des fruits et légumes en conserve aux légumineuses, poissons, nouilles et tartinades : explorez les gammes La Table de Grand-Mère et trouvez de nouvelles idées pour votre table.",
     categoryLabel: "Gamme",
   },
   en: {
     title: "Our Products",
     intro:
-      "Everyday ingredients for the meals you love. Explore our ranges and find new ideas for your table.",
+      "From canned fruit and vegetables to pulses, seafood, noodles and spreads, explore the La Table de Grand-Mère ranges and find new ideas for your table.",
     categoryLabel: "Range",
   },
 } as const;
@@ -184,6 +184,10 @@ export const productPage = {
     businessBody:
       "Vous êtes détaillant, grossiste ou acheteur en restauration? Communiquez avec notre équipe au sujet de ce produit.",
     businessCta: "Demande commerciale",
+    formatLabel: "Format",
+    weightLabel: "Poids net",
+    servingLabel: "Idée de service",
+    storageLabel: "Conservation",
   },
   en: {
     relatedTitle: "Similar products",
@@ -191,6 +195,10 @@ export const productPage = {
     businessBody:
       "Are you a retailer, wholesaler or foodservice buyer? Contact our team about this product.",
     businessCta: "Business Enquiry",
+    formatLabel: "Format",
+    weightLabel: "Net weight",
+    servingLabel: "Serving idea",
+    storageLabel: "Storage",
   },
 } as const;
 
@@ -232,12 +240,24 @@ export const recipesPage = {
     intro:
       "Qu'est-ce qu'on mange ce soir? Inspirez-vous de nos ingrédients pour cuisiner des plats savoureux au quotidien.",
     cards: [
-      { title: "Salade de pois chiches", caption: "Bol de salade de pois chiches" },
-      { title: "Riz aux légumes", caption: "Riz aux légumes frais" },
-      { title: "Salade de pâtes au thon", caption: "Salade de pâtes au thon" },
-      { title: "Soupe aux lentilles", caption: "Soupe aux lentilles maison" },
-      { title: "Salade de haricots", caption: "Salade de haricots" },
-      { title: "Dessert aux fruits en conserve", caption: "Dessert aux fruits" },
+      { title: "Crumble aux pêches", caption: "Crumble aux pêches en morceaux" },
+      {
+        title: "Salade de pois chiches, concombre et citron",
+        caption: "Bol de salade de pois chiches",
+      },
+      {
+        title: "Sardines en sauce tomate sur pain grillé",
+        caption: "Sardines en sauce tomate sur pain grillé",
+      },
+      {
+        title: "Rôtie au beurre d'arachide, banane et arachides concassées",
+        caption: "Rôtie au beurre d'arachide et banane",
+      },
+      {
+        title: "Linguines aux palourdes, à l'ail et au citron",
+        caption: "Linguines aux palourdes",
+      },
+      { title: "Verrine de yogourt, fruits et granola", caption: "Verrine de yogourt et fruits" },
     ],
   },
   en: {
@@ -246,13 +266,88 @@ export const recipesPage = {
     intro:
       "What's for dinner tonight? Find inspiration to cook tasty everyday meals with our ingredients.",
     cards: [
-      { title: "Chickpea Salad", caption: "A bowl of chickpea salad" },
-      { title: "Vegetable Rice", caption: "Rice with fresh vegetables" },
-      { title: "Tuna Pasta Salad", caption: "Tuna pasta salad" },
-      { title: "Lentil Soup", caption: "Homemade lentil soup" },
-      { title: "Bean Salad", caption: "Bean salad" },
-      { title: "Canned Fruit Dessert", caption: "Fruit dessert" },
+      { title: "Peach Crumble", caption: "Peach crumble made with peach chunks" },
+      {
+        title: "Chickpea, Cucumber and Lemon Salad",
+        caption: "A bowl of chickpea salad",
+      },
+      {
+        title: "Sardines in Tomato Sauce on Grilled Bread",
+        caption: "Sardines in tomato sauce with grilled sourdough",
+      },
+      {
+        title: "Peanut Butter Toast with Banana and Crushed Peanuts",
+        caption: "Peanut butter toast with banana",
+      },
+      {
+        title: "Clam Linguine with Garlic and Lemon",
+        caption: "Clam linguine",
+      },
+      { title: "Yogurt, Fruit and Granola Parfait", caption: "Yogurt and fruit parfait" },
     ],
+  },
+} as const;
+
+/** Text and alt text for the full-width photo banners. */
+export const banners = {
+  fr: {
+    heroAlt: "Une famille réunie autour d'une grande table pour un repas de fête",
+    rangeEyebrow: "Toute la gamme",
+    rangeTitle: "Le garde-manger de grand-maman, à portée de main.",
+    rangeBody:
+      "Fruits, légumes, légumineuses, nouilles, poissons, viandes et tartinades : de quoi cuisiner tous les jours.",
+    rangeCta: "Explorer la gamme",
+    rangeAlt:
+      "Produits La Table de Grand-Mère : palourdes, sardines, viande à lunch, pois chiches, thon, beurre d'arachide et nouilles",
+    storyAlt: "Une grand-mère cuisine une salade avec ses deux petites-filles",
+    recipesAlt: "Une table garnie de plats préparés avec les produits La Table de Grand-Mère",
+  },
+  en: {
+    heroAlt: "A family gathered around a big table for a festive meal",
+    rangeEyebrow: "The full range",
+    rangeTitle: "Grandma's pantry, right at hand.",
+    rangeBody:
+      "Fruit, vegetables, pulses, noodles, seafood, meats and spreads: everything for everyday cooking.",
+    rangeCta: "Explore the range",
+    rangeAlt:
+      "La Table de Grand-Mère products: clams, sardines, luncheon meat, chickpeas, tuna, peanut butter and noodles",
+    storyAlt: "A grandmother making a salad with her two granddaughters",
+    recipesAlt: "A table set with dishes made with La Table de Grand-Mère products",
+  },
+} as const;
+
+export const recipePage = {
+  fr: {
+    prep: "Préparation",
+    cook: "Cuisson",
+    servings: "Portions",
+    minutes: "min",
+    none: "Aucune",
+    ingredients: "Ingrédients",
+    steps: "Préparation",
+    tip: "Le conseil de grand-maman",
+    productsTitle: "Dans le garde-manger",
+    productsKicker: "Les produits de cette recette",
+    moreTitle: "D'autres idées à essayer",
+    viewRecipe: "Voir la recette",
+    backToRecipes: "Toutes les recettes",
+    withProduct: "Recettes avec ce produit",
+  },
+  en: {
+    prep: "Prep",
+    cook: "Cook",
+    servings: "Servings",
+    minutes: "min",
+    none: "None",
+    ingredients: "Ingredients",
+    steps: "Method",
+    tip: "Grandma's tip",
+    productsTitle: "From the pantry",
+    productsKicker: "Products in this recipe",
+    moreTitle: "More ideas to try",
+    viewRecipe: "View recipe",
+    backToRecipes: "All recipes",
+    withProduct: "Recipes with this product",
   },
 } as const;
 
@@ -260,7 +355,7 @@ export const businessPage = {
   fr: {
     title: "Pour les professionnels",
     kicker: "Ensemble, servons de bons produits.",
-    body: "Vous êtes détaillant, grossiste, distributeur ou responsable des achats alimentaires? Découvrez notre gamme de produits et communiquez avec nous pour discuter de vos besoins.",
+    body: "Vous êtes détaillant, grossiste, distributeur ou responsable des achats alimentaires? Découvrez nos gammes — fruits et légumes en conserve, légumineuses, poissons et fruits de mer, nouilles instantanées et tartinades — et communiquez avec nous pour discuter de vos besoins.",
     cards: [
       {
         key: "retailers" as const,
@@ -282,7 +377,7 @@ export const businessPage = {
   en: {
     title: "For Business",
     kicker: "Good Food. Stronger Partnerships.",
-    body: "Are you a retailer, wholesaler, distributor or food purchasing professional? Explore our product range and contact us to discuss your needs.",
+    body: "Are you a retailer, wholesaler, distributor or food purchasing professional? Explore our ranges — canned fruit and vegetables, pulses, seafood, instant noodles and spreads — and contact us to discuss your needs.",
     cards: [
       {
         key: "retailers" as const,
@@ -309,7 +404,7 @@ export const buyerPages = {
       title: "Pour les détaillants",
       kicker: "Une gamme qui trouve sa place dans votre commerce.",
       paragraphs: [
-        "La Table de Grand-Mère propose des aliments du garde-manger pour les repas de tous les jours : conserves, légumineuses, riz, pâtes, poissons et autres produits.",
+        "La Table de Grand-Mère propose des aliments du garde-manger pour les repas de tous les jours : fruits et légumes en conserve, légumineuses, riz et nouilles, poissons et fruits de mer, viandes à lunch et tartinades.",
         "Vous souhaitez en savoir plus sur notre sélection pour votre magasin? Communiquez avec notre équipe pour discuter des produits et des formats disponibles.",
       ],
       cta: "Demander des renseignements",
@@ -319,7 +414,7 @@ export const buyerPages = {
       title: "For Retailers",
       kicker: "A Range That Belongs on Your Shelves.",
       paragraphs: [
-        "La Table de Grand-Mère offers pantry foods for everyday meals, including canned foods, legumes, rice, pasta, fish and more.",
+        "La Table de Grand-Mère offers pantry foods for everyday meals, including canned fruit and vegetables, pulses, rice and noodles, seafood, luncheon meats and spreads.",
         "Interested in carrying our products in your store? Contact our team to discuss the range and available formats.",
       ],
       cta: "Request Information",
@@ -353,7 +448,7 @@ export const buyerPages = {
       title: "Restauration et services alimentaires",
       kicker: "Des essentiels pour les cuisines qui servent du monde.",
       paragraphs: [
-        "Restaurants, traiteurs, hôtels, cafétérias et acheteurs institutionnels : découvrez notre sélection de riz, légumineuses, conserves, pâtes, poissons et autres aliments pratiques pour vos menus.",
+        "Restaurants, traiteurs, hôtels, cafétérias et acheteurs institutionnels : découvrez notre sélection de fruits et légumes en conserve, légumineuses, riz et nouilles, poissons et fruits de mer, viandes à lunch et tartinades.",
         "Dites-nous quels produits vous recherchez, vos formats souhaités et vos besoins d'approvisionnement. Notre équipe pourra étudier votre demande et vous proposer les options disponibles.",
       ],
       cta: "Faire une demande d'approvisionnement",
@@ -363,7 +458,7 @@ export const buyerPages = {
       title: "Foodservice & Institutions",
       kicker: "Everyday Essentials for Kitchens That Serve People.",
       paragraphs: [
-        "Restaurants, caterers, hotels, cafeterias and institutional food buyers: explore our range of rice, legumes, canned goods, pasta, fish and other useful menu ingredients.",
+        "Restaurants, caterers, hotels, cafeterias and institutional food buyers: explore our range of canned fruit and vegetables, pulses, rice and noodles, seafood, luncheon meats and spreads.",
         "Tell us which products you need, your preferred formats and your supply requirements. Our team can review your request and discuss available options.",
       ],
       cta: "Request Supply Information",
@@ -462,12 +557,12 @@ export const seo = {
     fr: {
       title: "La Table de Grand-Mère | Aliments pour se retrouver",
       description:
-        "Découvrez les produits La Table de Grand-Mère pour vos recettes et repas du quotidien. Le goût de se retrouver autour de la table.",
+        "Découvrez les fruits et légumes en conserve, légumineuses, poissons et fruits de mer, nouilles instantanées et tartinades La Table de Grand-Mère.",
     },
     en: {
       title: "La Table de Grand-Mère | Food That Brings Us Together",
       description:
-        "Explore La Table de Grand-Mère pantry foods for everyday meals, recipes and the joy of coming together around the table.",
+        "Explore La Table de Grand-Mère canned fruit and vegetables, pulses, seafood, instant noodles and spreads for everyday meals.",
     },
   },
   products: {

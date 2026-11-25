@@ -9,7 +9,7 @@ import "../globals.css";
 export const metadata: Metadata = rootMetadata.en;
 
 export const viewport: Viewport = {
-  themeColor: "#f7f2e9",
+  themeColor: "#faf5ea",
   colorScheme: "light",
 };
 

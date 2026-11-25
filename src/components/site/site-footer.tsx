@@ -33,7 +33,7 @@ export function SiteFooter({ lang }: { lang: Lang }) {
     <footer className="mt-auto border-t border-border/60 bg-ink text-ink-foreground">
       {/* Top accent bar */}
       <div className="h-1 w-full" style={{
-        background: "linear-gradient(90deg, oklch(0.712 0.098 76), oklch(0.60 0.075 55), oklch(0.712 0.098 76))"
+        background: "linear-gradient(90deg, oklch(0.80 0.09 84), oklch(0.64 0.075 62), oklch(0.80 0.09 84))"
       }} aria-hidden="true" />
       <Container size="wide" className="py-16 md:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr_1fr]">

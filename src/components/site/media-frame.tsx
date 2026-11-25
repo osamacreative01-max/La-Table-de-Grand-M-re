@@ -47,7 +47,7 @@ export function FoodIllustration({ tone, accent }: { tone: Tone; accent: string 
   if (tone === "wheat" || tone === "honey") {
     return (
       <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"
-        className="absolute left-1/2 top-1/2 w-[58%] max-w-[180px] -translate-x-1/2 -translate-y-1/2 opacity-[0.4]"
+        className="absolute left-1/2 top-1/2 w-[58%] max-w-[260px] -translate-x-1/2 -translate-y-1/2 opacity-[0.4]"
         aria-hidden="true" style={style}>
         <ellipse cx="60" cy="72" rx="38" ry="12" stroke="currentColor" strokeWidth="1.5"/>
         <path d="M22 62 Q22 32 60 32 Q98 32 98 62" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
@@ -85,7 +85,7 @@ export function FoodIllustration({ tone, accent }: { tone: Tone; accent: string 
   if (tone === "sage") {
     return (
       <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"
-        className="absolute left-1/2 top-1/2 w-[58%] max-w-[180px] -translate-x-1/2 -translate-y-1/2 opacity-[0.4]"
+        className="absolute left-1/2 top-1/2 w-[58%] max-w-[260px] -translate-x-1/2 -translate-y-1/2 opacity-[0.4]"
         aria-hidden="true" style={style}>
         <path d="M28 44 Q26 60 30 76 Q34 90 60 92 Q86 90 90 76 Q94 60 92 44 Q80 36 60 36 Q40 36 28 44Z"
           stroke="currentColor" strokeWidth="1.5"/>
@@ -106,7 +106,7 @@ export function FoodIllustration({ tone, accent }: { tone: Tone; accent: string 
   if (tone === "linen" || tone === "cream") {
     return (
       <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"
-        className="absolute left-1/2 top-1/2 w-[58%] max-w-[180px] -translate-x-1/2 -translate-y-1/2 opacity-[0.4]"
+        className="absolute left-1/2 top-1/2 w-[58%] max-w-[260px] -translate-x-1/2 -translate-y-1/2 opacity-[0.4]"
         aria-hidden="true" style={style}>
         <circle cx="60" cy="64" r="34" stroke="currentColor" strokeWidth="1.5"/>
         <circle cx="60" cy="64" r="26" stroke="currentColor" strokeWidth="0.8" opacity="0.4"/>
@@ -125,7 +125,7 @@ export function FoodIllustration({ tone, accent }: { tone: Tone; accent: string 
 
   return (
     <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"
-      className="absolute left-1/2 top-1/2 w-[58%] max-w-[180px] -translate-x-1/2 -translate-y-1/2 opacity-[0.4]"
+      className="absolute left-1/2 top-1/2 w-[58%] max-w-[260px] -translate-x-1/2 -translate-y-1/2 opacity-[0.4]"
       aria-hidden="true" style={style}>
       <circle cx="60" cy="64" r="32" stroke="currentColor" strokeWidth="1.5"/>
       <circle cx="60" cy="64" r="24" stroke="currentColor" strokeWidth="0.8" opacity="0.4"/>

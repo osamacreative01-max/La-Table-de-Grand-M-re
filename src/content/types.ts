@@ -22,7 +22,38 @@ export interface Product {
   description: Localized;
   /** Product photo in `public/`. */
   image?: string;
+  /** Styled photo of the product served on a table, in `public/images`. */
+  lifestyle?: string;
+  /** Package type, e.g. can, jar, pouch. */
+  format?: Localized;
+  /** Net weight exactly as supplied by the client. Omitted when unconfirmed. */
+  netWeight?: string;
+  /** Serving suggestion shown on the product page. */
+  serving?: Localized;
+  /** Storage instruction, used for frozen products. */
+  storage?: Localized;
   tone: Tone;
 }
 
-export type Tone = "cream" | "wheat" | "clay" | "sage" | "honey" | "cocoa" | "linen";
+export interface Recipe {
+  key: string;
+  slug: Localized;
+  title: Localized;
+  /** Short line shown on cards and under the recipe title. */
+  summary: Localized;
+  /** Alt text for the recipe illustration. */
+  caption: Localized;
+  /** Photo of the finished dish in `public/images`, when one exists. */
+  photo?: string;
+  prepMinutes: number;
+  cookMinutes: number;
+  servings: number;
+  /** Product keys from the catalogue used in this recipe, main product first. */
+  products: string[];
+  ingredients: Record<Lang, string[]>;
+  steps: Record<Lang, string[]>;
+  tip?: Localized;
+  tone: Tone;
+}
+
+export type Tone ="cream" | "wheat" | "clay" | "sage" | "honey" | "cocoa" | "linen";
