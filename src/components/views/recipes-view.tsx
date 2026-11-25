@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Container, Section } from "@/components/site/primitives";
+import { Reveal } from "@/components/motion/reveal";
 import { RecipeCard } from "@/components/site/cards";
 import { MediaFrame } from "@/components/site/media-frame";
 import { banners, recipesPage } from "@/content/copy";
@@ -64,9 +65,9 @@ export function RecipesView({ lang }: { lang: Lang }) {
         <Container size="wide">
           <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {recipes.map((recipe, index) => (
-              <li key={recipe.key}>
+              <Reveal as="li" key={recipe.key} delay={(index % 3) * 0.08}>
                 <RecipeCard {...recipeCardProps(recipe, lang, index)} />
-              </li>
+              </Reveal>
             ))}
           </ul>
         </Container>

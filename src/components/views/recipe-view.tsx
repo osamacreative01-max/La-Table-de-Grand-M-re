@@ -102,8 +102,9 @@ export function RecipeView({ lang, recipe }: { lang: Lang; recipe: Recipe }) {
                 style={{ transform: "rotate(-1.5deg)" }}
               />
               <MediaFrame
-                src={main?.image}
-                alt={main ? main.name[lang] : recipe.caption[lang]}
+                src={recipe.photo ?? main?.image}
+                alt={recipe.photo || !main ? recipe.caption[lang] : main.name[lang]}
+                imageClassName={recipe.photo ? "object-cover p-0 drop-shadow-none" : undefined}
                 caption={recipe.caption[lang]}
                 tone={recipe.tone}
                 ratio="4/3"

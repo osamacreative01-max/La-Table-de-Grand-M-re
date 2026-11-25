@@ -43,6 +43,8 @@ export interface Recipe {
   summary: Localized;
   /** Alt text for the recipe illustration. */
   caption: Localized;
+  /** Photo of the finished dish in `public/images`, when one exists. */
+  photo?: string;
   prepMinutes: number;
   cookMinutes: number;
   servings: number;

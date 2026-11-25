@@ -20,6 +20,10 @@
   0%, 100% { transform: translateY(0px); }
   50%       { transform: translateY(-6px); }
 }
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
 @keyframes shimmer {
   from { background-position: -200% center; }
   to   { background-position: 200% center; }
@@ -256,6 +260,15 @@
 @utility animate-delay-300 { animation-delay: 300ms; }
 @utility animate-delay-400 { animation-delay: 400ms; }
 @utility animate-delay-500 { animation-delay: 500ms; }
+
+/* Category ticker on the home page: two identical rows scroll by half their width. */
+@utility marquee {
+  animation: marquee 48s linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
 
 /* Google Translate: keep the machine translation invisible except the text it rewrites */
 #google_translate_element,

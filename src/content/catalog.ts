@@ -252,6 +252,7 @@ export const products: Product[] = [
       en: "Toss into a cilantro-lime salsa.",
     },
     image: "/products/pineapple-chunks.webp",
+    lifestyle: "/images/dish-pineapple-chunks.webp",
     format: can,
     tone: "honey",
   },
@@ -724,6 +725,7 @@ export const products: Product[] = [
     },
     format: easyCan,
     image: "/products/flaked-tuna-water.webp",
+    lifestyle: "/images/dish-tuna-toast.webp",
     tone: "linen",
   },
   {
@@ -837,6 +839,7 @@ export const products: Product[] = [
     format: easyCan,
     netWeight: "340 g (12 oz)",
     image: "/products/beef-luncheon-meat.webp",
+    lifestyle: "/images/dish-luncheon-potatoes.webp",
     tone: "clay",
   },
   {

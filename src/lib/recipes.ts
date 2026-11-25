@@ -41,6 +41,7 @@ export function recipeCardProps(recipe: Recipe, lang: Lang, index: number) {
     note: `${totalMinutes(recipe)} ${recipePage[lang].minutes}`,
     label: recipePage[lang].viewRecipe,
     image: main?.image,
+    photo: recipe.photo,
     imageAlt: main ? main.name[lang] : undefined,
   };
 }

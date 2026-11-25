@@ -216,6 +216,7 @@ export function RecipeCard({
   label,
   image,
   imageAlt,
+  photo,
 }: {
   title: string;
   caption: string;
@@ -228,9 +229,28 @@ export function RecipeCard({
   /** Product shot shown in the corner of the illustration. */
   image?: string;
   imageAlt?: string;
+  /** Photo of the finished dish; replaces the illustration when set. */
+  photo?: string;
 }) {
   const body = (
     <>
+      {photo ? (
+        <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
+          <Image
+            src={photo}
+            alt={caption}
+            fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+          />
+          <span
+            aria-hidden="true"
+            className="absolute left-5 top-4 rounded-full bg-background/85 px-3 py-1 font-heading text-sm text-foreground/70 backdrop-blur-sm"
+          >
+            {String(index + 1).padStart(2, "0")}
+          </span>
+        </div>
+      ) : (
       <div
         className="relative aspect-[4/3] overflow-hidden"
         style={{ backgroundImage: recipeTones[tone] }}
@@ -272,6 +292,7 @@ export function RecipeCard({
           {caption}
         </p>
       </div>
+      )}
       <div className="flex flex-1 flex-col gap-2 p-6">
         <h3 className="text-xl leading-snug transition-colors group-hover:text-brand-foreground">
           {title}

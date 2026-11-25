@@ -26,7 +26,22 @@ const jobs = [
   ["Asset 27@4x-100.jpg", "lifestyle-red-split-lentils", 900],
 ];
 
+/**
+ * Dishes cropped out of the flat-lay spread (Random.jpg), each matching a
+ * serving suggestion from the client's product portfolios.
+ * source file -> [output name, { left, top, width, height }]
+ */
+const crops = [
+  ["Random.jpg", "dish-chickpea-salad", { left: 730, top: 700, width: 680, height: 680 }],
+  ["Random.jpg", "dish-tuna-toast", { left: 300, top: 560, width: 640, height: 640 }],
+  ["Random.jpg", "dish-luncheon-potatoes", { left: 860, top: 120, width: 600, height: 600 }],
+  ["Random.jpg", "dish-pineapple-chunks", { left: 0, top: 0, width: 900, height: 900 }],
+];
+
 await mkdir(OUTPUT_DIR, { recursive: true });
+
+const report = (output, info) =>
+  console.log(`${output}  ${info.width}x${info.height}  ${(info.size / 1024).toFixed(0)} KB`);
 
 for (const [source, name, width] of jobs) {
   const output = path.join(OUTPUT_DIR, `${name}.webp`);
@@ -34,5 +49,15 @@ for (const [source, name, width] of jobs) {
     .resize({ width, withoutEnlargement: true })
     .webp({ quality: 80 })
     .toFile(output);
-  console.log(`${output}  ${info.width}x${info.height}  ${(info.size / 1024).toFixed(0)} KB`);
+  report(output, info);
+}
+
+for (const [source, name, region] of crops) {
+  const output = path.join(OUTPUT_DIR, `${name}.webp`);
+  const info = await sharp(path.join(SOURCE_DIR, source))
+    .extract(region)
+    .resize({ width: 900, withoutEnlargement: true })
+    .webp({ quality: 82 })
+    .toFile(output);
+  report(output, info);
 }
