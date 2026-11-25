@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Snowflake, UtensilsCrossed } from "lucide-react";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
@@ -128,6 +129,18 @@ export function ProductView({
                   <Snowflake className="size-3.5 text-brand-foreground/70" aria-hidden="true" />
                   {product.storage[lang]}
                 </p>
+              )}
+
+              {product.lifestyle && (
+                <div className="relative mt-6 aspect-[16/10] overflow-hidden rounded-2xl border border-border/70">
+                  <Image
+                    src={product.lifestyle}
+                    alt={product.serving ? product.serving[lang] : product.name[lang]}
+                    fill
+                    sizes="(min-width: 1024px) 40vw, 92vw"
+                    className="object-cover object-[center_60%]"
+                  />
+                </div>
               )}
 
               {product.serving && (

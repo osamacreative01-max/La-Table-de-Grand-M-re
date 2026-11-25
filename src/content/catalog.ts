@@ -558,6 +558,7 @@ export const products: Product[] = [
     format: { fr: "Sachet", en: "Bag" },
     netWeight: "500 g",
     image: "/products/red-split-lentils.webp",
+    lifestyle: "/images/lifestyle-red-split-lentils.webp",
     tone: "clay",
   },
   {
@@ -627,6 +628,7 @@ export const products: Product[] = [
     format: { fr: "Sachet", en: "Pack" },
     netWeight: "135 g",
     image: "/products/hot-spicy-chicken-noodles.webp",
+    lifestyle: "/images/lifestyle-spicy-chicken-noodles.webp",
     tone: "clay",
   },
   {
@@ -816,6 +818,7 @@ export const products: Product[] = [
     format: easyCan,
     netWeight: "340 g (12 oz)",
     image: "/products/chicken-luncheon-meat.webp",
+    lifestyle: "/images/lifestyle-chicken-luncheon-meat.webp",
     tone: "sage",
   },
   {
@@ -871,6 +874,7 @@ export const products: Product[] = [
     format: { fr: "Pot à couvercle vissé", en: "Screw-top jar" },
     netWeight: "170 g",
     image: "/products/crunchy-peanut-butter.webp",
+    lifestyle: "/images/lifestyle-peanut-butter.webp",
     tone: "honey",
   },
   {

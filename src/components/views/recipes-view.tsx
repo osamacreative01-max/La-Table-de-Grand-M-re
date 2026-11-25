@@ -1,8 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container, Section } from "@/components/site/primitives";
 import { RecipeCard } from "@/components/site/cards";
 import { MediaFrame } from "@/components/site/media-frame";
-import { recipesPage } from "@/content/copy";
+import { banners, recipesPage } from "@/content/copy";
 import { categories, products } from "@/content/catalog";
 import { recipes } from "@/content/recipes";
 import { recipeCardProps } from "@/lib/recipes";
@@ -27,27 +28,35 @@ export function RecipesView({ lang }: { lang: Lang }) {
   return (
     <main id="main">
       {/* Hero */}
-      <section className="relative overflow-hidden bg-grain-rich">
-        <div className="pointer-events-none absolute inset-0 bg-dots opacity-30" aria-hidden="true" />
+      <section className="relative isolate overflow-hidden bg-background">
+        <Image
+          src="/images/hero-recipes.webp"
+          alt={banners[lang].recipesAlt}
+          fill
+          priority
+          sizes="100vw"
+          className="-z-20 object-cover object-[20%_center]"
+        />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-20 -top-20 size-80 rounded-full"
-          style={{ background: "radial-gradient(circle, oklch(0.86 0.06 76 / 0.18), transparent 70%)" }}
+          className="absolute inset-0 -z-10 bg-background/80 lg:bg-transparent lg:bg-[linear-gradient(270deg,var(--background)_0%,color-mix(in_oklab,var(--background)_80%,transparent)_35%,transparent_58%)]"
         />
-        <Container size="wide" className="relative py-16 md:py-24">
-          <div className="inline-flex items-center gap-2.5 rounded-full border border-brand/40 bg-brand-soft/60 px-4 py-1.5 text-[0.68rem] font-medium uppercase tracking-[0.2em] text-brand-foreground/75">
-            <span aria-hidden="true" className="size-1.5 rounded-full bg-brand" />
-            {lang === "fr" ? "Idées repas" : "Meal ideas"}
+        <Container size="wide" className="flex min-h-[460px] items-center py-16 md:min-h-[520px] md:py-24 lg:justify-end">
+          <div className="max-w-xl">
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-brand/40 bg-brand-soft/60 px-4 py-1.5 text-[0.68rem] font-medium uppercase tracking-[0.2em] text-brand-foreground/75">
+              <span aria-hidden="true" className="size-1.5 rounded-full bg-brand" />
+              {lang === "fr" ? "Idées repas" : "Meal ideas"}
+            </div>
+            <h1 className="mt-5 text-[2.5rem] leading-[1.04] tracking-[-0.02em] sm:text-5xl lg:text-[3.5rem]">
+              {copy.title}
+            </h1>
+            <p className="mt-6 font-heading text-[1.3rem] leading-snug text-brand-foreground/80 sm:text-2xl">
+              {copy.kicker}
+            </p>
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-[1.05rem]">
+              {copy.intro}
+            </p>
           </div>
-          <h1 className="mt-5 max-w-3xl text-[2.5rem] leading-[1.04] tracking-[-0.02em] sm:text-5xl lg:text-[3.5rem]">
-            {copy.title}
-          </h1>
-          <p className="mt-6 font-heading text-[1.3rem] leading-snug text-brand-foreground/80 sm:text-2xl">
-            {copy.kicker}
-          </p>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-[1.05rem]">
-            {copy.intro}
-          </p>
         </Container>
       </section>
 

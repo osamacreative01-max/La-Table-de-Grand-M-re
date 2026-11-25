@@ -126,6 +126,7 @@ export function ProductCard({
   label,
   eyebrow,
   className,
+  photo = false,
 }: {
   product: Product;
   href: string;
@@ -133,6 +134,8 @@ export function ProductCard({
   label: string;
   eyebrow?: string;
   className?: string;
+  /** Show the served-on-the-table photo instead of the packshot, when one exists. */
+  photo?: boolean;
 }) {
   return (
     <Link
@@ -145,15 +148,27 @@ export function ProductCard({
       )}
     >
       <div className="overflow-hidden">
-        <MediaFrame
-          src={product.image}
-          alt={product.name[lang]}
-          tone={product.tone}
-          ratio="4/5"
-          rounded="rounded-none"
-          sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
-          imageClassName="group-hover:scale-[1.05]"
-        />
+        {photo && product.lifestyle ? (
+          <div className="relative aspect-[4/5] overflow-hidden bg-secondary">
+            <Image
+              src={product.lifestyle}
+              alt={product.name[lang]}
+              fill
+              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 45vw, 100vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            />
+          </div>
+        ) : (
+          <MediaFrame
+            src={product.image}
+            alt={product.name[lang]}
+            tone={product.tone}
+            ratio="4/5"
+            rounded="rounded-none"
+            sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
+            imageClassName="group-hover:scale-[1.05]"
+          />
+        )}
       </div>
       <div className="flex flex-1 flex-col gap-2 p-5 sm:p-6">
         {eyebrow && (

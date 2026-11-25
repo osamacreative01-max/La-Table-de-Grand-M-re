@@ -1,8 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container, Section } from "@/components/site/primitives";
-import { ProductStage } from "@/components/site/product-stage";
 import { Button } from "@/components/ui/button";
-import { storyPage } from "@/content/copy";
+import { banners, storyPage } from "@/content/copy";
 import { paths } from "@/lib/routes";
 import type { Lang } from "@/content/types";
 
@@ -13,36 +13,32 @@ export function StoryView({ lang }: { lang: Lang }) {
   return (
     <main id="main">
       {/* Hero */}
-      <section className="relative overflow-hidden bg-grain-rich">
-        {/* Decorative background */}
+      <section className="relative isolate overflow-hidden bg-background">
+        <Image
+          src="/images/hero-our-story.webp"
+          alt={banners[lang].storyAlt}
+          fill
+          priority
+          sizes="100vw"
+          className="-z-20 object-cover object-[75%_center]"
+        />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-24 -top-24 size-96 rounded-full"
-          style={{
-            background:
-              "radial-gradient(circle, oklch(0.88 0.06 78 / 0.2), transparent 70%)",
-          }}
+          className="absolute inset-0 -z-10 bg-background/80 lg:bg-transparent lg:bg-[linear-gradient(90deg,var(--background)_0%,color-mix(in_oklab,var(--background)_80%,transparent)_30%,transparent_55%)]"
         />
-        <div className="pointer-events-none absolute inset-0 bg-dots opacity-30" aria-hidden="true" />
 
-        <Container size="wide" className="relative py-16 md:py-24">
-          <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-20">
-            <div className="max-w-xl">
-              <div className="inline-flex items-center gap-2.5 rounded-full border border-brand/40 bg-brand-soft/60 px-4 py-1.5 text-[0.68rem] font-medium uppercase tracking-[0.2em] text-brand-foreground/75">
-                <span aria-hidden="true" className="size-1.5 rounded-full bg-brand" />
-                {lang === "fr" ? "Depuis la cuisine" : "From the kitchen"}
-              </div>
-              <h1 className="mt-6 text-[2.6rem] leading-[1.04] tracking-[-0.02em] sm:text-5xl lg:text-6xl">
-                {copy.title}
-              </h1>
-              <p className="mt-6 font-heading text-[1.3rem] leading-snug text-brand-foreground/80 sm:text-2xl">
-                {copy.kicker}
-              </p>
+        <Container size="wide" className="flex min-h-[460px] items-center py-16 md:min-h-[540px] md:py-24">
+          <div className="max-w-xl">
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-brand/40 bg-brand-soft/60 px-4 py-1.5 text-[0.68rem] font-medium uppercase tracking-[0.2em] text-brand-foreground/75">
+              <span aria-hidden="true" className="size-1.5 rounded-full bg-brand" />
+              {lang === "fr" ? "Depuis la cuisine" : "From the kitchen"}
             </div>
-
-            <div className="relative">
-              <ProductStage lang={lang} className="relative" />
-            </div>
+            <h1 className="mt-6 text-[2.6rem] leading-[1.04] tracking-[-0.02em] sm:text-5xl lg:text-6xl">
+              {copy.title}
+            </h1>
+            <p className="mt-6 font-heading text-[1.3rem] leading-snug text-brand-foreground/80 sm:text-2xl">
+              {copy.kicker}
+            </p>
           </div>
         </Container>
       </section>

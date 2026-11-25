@@ -4,8 +4,7 @@ import { ArrowRight, Check, Leaf, ShoppingBag, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container, Eyebrow, Section, SectionHeading } from "@/components/site/primitives";
 import { ProductCard, RecipeCard } from "@/components/site/cards";
-import { ProductStage } from "@/components/site/product-stage";
-import { businessSubnav, home, ui } from "@/content/copy";
+import { banners, businessSubnav, home, ui } from "@/content/copy";
 import { categories, products } from "@/content/catalog";
 import { recipes } from "@/content/recipes";
 import { recipeCardProps } from "@/lib/recipes";
@@ -21,8 +20,8 @@ const subHref: Record<string, Record<Lang, string>> = {
 const businessIcons = [ShoppingBag, Users, Leaf];
 
 const featuredKeys = [
-  "peches-en-moities",
-  "sardines-sauce-tomate",
+  "lentilles-rouges-fendues",
+  "poulet",
   "nouilles-poulet-epice",
   "beurre-darachide-croquant",
 ];
@@ -38,29 +37,32 @@ export function HomeView({ lang }: { lang: Lang }) {
   return (
     <main id="main">
       {/* ── A — HERO ──────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-grain-rich">
-        {/* Soft warmth in the corners */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-40 -top-40 size-[560px] rounded-full bg-[radial-gradient(circle,rgb(200_164_92/0.18),transparent_68%)]"
+      <section className="relative isolate overflow-hidden bg-ink text-ink-foreground">
+        <Image
+          src="/images/hero-family-table.webp"
+          alt={banners[lang].heroAlt}
+          fill
+          priority
+          sizes="100vw"
+          className="-z-20 object-cover object-[72%_center]"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-32 -left-32 size-[420px] rounded-full bg-[radial-gradient(circle,rgb(124_29_36/0.07),transparent_70%)]"
+          className="absolute inset-0 -z-10 bg-ink/70 lg:bg-transparent lg:bg-[linear-gradient(90deg,var(--ink)_0%,color-mix(in_oklab,var(--ink)_85%,transparent)_38%,transparent_70%)]"
         />
 
         <Container
           size="wide"
-          className="relative grid items-center gap-12 py-14 md:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:py-24"
+          className="flex min-h-[560px] items-center py-20 md:min-h-[620px] lg:min-h-[680px] lg:py-28"
         >
           <div className="max-w-[34rem] animate-fade-up">
-            <Eyebrow>{copy.eyebrow}</Eyebrow>
+            <Eyebrow tone="light">{copy.eyebrow}</Eyebrow>
 
-            <h1 className="mt-6 text-[2.375rem] font-semibold leading-[1.05] tracking-[-0.02em] sm:text-[3rem] lg:text-[3.5rem]">
+            <h1 className="mt-6 text-[2.375rem] font-semibold leading-[1.05] tracking-[-0.02em] text-ink-foreground sm:text-[3rem] lg:text-[3.5rem]">
               {copy.hero.title}
             </h1>
 
-            <p className="mt-6 max-w-[30rem] text-[1.0625rem] leading-relaxed text-muted-foreground sm:text-[1.125rem]">
+            <p className="mt-6 max-w-[30rem] text-[1.0625rem] leading-relaxed text-ink-foreground/85 sm:text-[1.125rem]">
               {copy.hero.body}
             </p>
 
@@ -69,7 +71,13 @@ export function HomeView({ lang }: { lang: Lang }) {
                 {copy.hero.cta}
                 <ArrowRight className="size-4" aria-hidden="true" />
               </Button>
-              <Button variant="outline" size="xl" nativeButton={false} render={<Link href={paths.story[lang]} />}>
+              <Button
+                variant="outline"
+                size="xl"
+                nativeButton={false}
+                render={<Link href={paths.story[lang]} />}
+                className="border-cream/50 text-cream hover:border-cream hover:bg-cream hover:text-ink"
+              >
                 {lang === "fr" ? "Notre histoire" : "Our Story"}
               </Button>
             </div>
@@ -81,11 +89,11 @@ export function HomeView({ lang }: { lang: Lang }) {
               ).map((item) => (
                 <li
                   key={item}
-                  className="inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-3.5 py-1.5 text-[0.75rem] font-medium text-foreground/75"
+                  className="inline-flex items-center gap-2 rounded-full border border-cream/25 bg-cream/10 px-3.5 py-1.5 text-[0.75rem] font-medium text-ink-foreground/90 backdrop-blur-sm"
                 >
                   <span
                     aria-hidden="true"
-                    className="inline-flex size-4 items-center justify-center rounded-full bg-olive text-cream"
+                    className="inline-flex size-4 items-center justify-center rounded-full bg-cream text-ink"
                   >
                     <Check className="size-2.5" strokeWidth={3} />
                   </span>
@@ -94,8 +102,41 @@ export function HomeView({ lang }: { lang: Lang }) {
               ))}
             </ul>
           </div>
+        </Container>
+      </section>
 
-          <ProductStage lang={lang} priority className="animate-fade-up [animation-delay:120ms]" />
+      {/* ── A2 — RANGE BANNER ─────────────────────────────────────── */}
+      <section className="relative isolate overflow-hidden bg-ink text-ink-foreground">
+        <Image
+          src="/images/banner-product-range.webp"
+          alt={banners[lang].rangeAlt}
+          fill
+          sizes="100vw"
+          className="-z-20 object-cover object-[85%_center]"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-ink/75 md:bg-transparent md:bg-[linear-gradient(90deg,var(--ink)_0%,color-mix(in_oklab,var(--ink)_70%,transparent)_35%,transparent_60%)]"
+        />
+        <Container size="wide" className="flex min-h-[340px] items-center py-14 md:min-h-[400px]">
+          <div className="max-w-md">
+            <Eyebrow tone="light">{banners[lang].rangeEyebrow}</Eyebrow>
+            <h2 className="mt-4 text-3xl leading-[1.08] text-ink-foreground sm:text-[2.4rem]">
+              {banners[lang].rangeTitle}
+            </h2>
+            <p className="mt-4 text-[0.98rem] leading-relaxed text-ink-foreground/80">
+              {banners[lang].rangeBody}
+            </p>
+            <Button
+              size="lg"
+              nativeButton={false}
+              render={<Link href={paths.products[lang]} />}
+              className="mt-7"
+            >
+              {banners[lang].rangeCta}
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </Button>
+          </div>
         </Container>
       </section>
 
@@ -132,6 +173,7 @@ export function HomeView({ lang }: { lang: Lang }) {
                     href={productPath(lang, category.slug[lang], product.slug[lang])}
                     label={t.viewProduct}
                     eyebrow={category.name[lang]}
+                    photo
                   />
                 </li>
               );

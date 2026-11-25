@@ -22,6 +22,8 @@ export interface Product {
   description: Localized;
   /** Product photo in `public/`. */
   image?: string;
+  /** Styled photo of the product served on a table, in `public/images`. */
+  lifestyle?: string;
   /** Package type, e.g. can, jar, pouch. */
   format?: Localized;
   /** Net weight exactly as supplied by the client. Omitted when unconfirmed. */

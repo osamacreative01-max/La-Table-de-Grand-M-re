@@ -288,6 +288,34 @@ export const recipesPage = {
   },
 } as const;
 
+/** Text and alt text for the full-width photo banners. */
+export const banners = {
+  fr: {
+    heroAlt: "Une famille réunie autour d'une grande table pour un repas de fête",
+    rangeEyebrow: "Toute la gamme",
+    rangeTitle: "Le garde-manger de grand-maman, à portée de main.",
+    rangeBody:
+      "Fruits, légumes, légumineuses, nouilles, poissons, viandes et tartinades : de quoi cuisiner tous les jours.",
+    rangeCta: "Explorer la gamme",
+    rangeAlt:
+      "Produits La Table de Grand-Mère : palourdes, sardines, viande à lunch, pois chiches, thon, beurre d'arachide et nouilles",
+    storyAlt: "Une grand-mère cuisine une salade avec ses deux petites-filles",
+    recipesAlt: "Une table garnie de plats préparés avec les produits La Table de Grand-Mère",
+  },
+  en: {
+    heroAlt: "A family gathered around a big table for a festive meal",
+    rangeEyebrow: "The full range",
+    rangeTitle: "Grandma's pantry, right at hand.",
+    rangeBody:
+      "Fruit, vegetables, pulses, noodles, seafood, meats and spreads: everything for everyday cooking.",
+    rangeCta: "Explore the range",
+    rangeAlt:
+      "La Table de Grand-Mère products: clams, sardines, luncheon meat, chickpeas, tuna, peanut butter and noodles",
+    storyAlt: "A grandmother making a salad with her two granddaughters",
+    recipesAlt: "A table set with dishes made with La Table de Grand-Mère products",
+  },
+} as const;
+
 export const recipePage = {
   fr: {
     prep: "Préparation",
