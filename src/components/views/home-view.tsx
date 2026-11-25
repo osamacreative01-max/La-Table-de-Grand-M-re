@@ -205,8 +205,9 @@ export function HomeView({ lang }: { lang: Lang }) {
         </Container>
       </Section>
 
-      {/* ── C — BRAND STORY ───────────────────────────────────────── */}
-      <Section>
+      {/* ── C — BRAND STORY (logo nameplate colours) ─────────────── */}
+      <Section className="theme-forest bg-background">
+
         <Container size="wide">
           <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
             <Reveal className="relative">

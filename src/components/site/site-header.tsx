@@ -126,7 +126,7 @@ function MobileMenu({
       role="dialog"
       aria-modal="true"
       aria-label={lang === "fr" ? "Navigation mobile" : "Mobile navigation"}
-      className="fixed inset-0 z-50 flex flex-col bg-background lg:hidden"
+      className="theme-forest fixed inset-0 z-50 flex flex-col bg-background lg:hidden"
     >
       <div className="flex items-center justify-between gap-4 border-b border-border px-5 py-4">
         <Link
@@ -245,7 +245,7 @@ export function SiteHeader({ lang }: { lang: Lang }) {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-md">
+    <header className="theme-forest sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-md">
       <Container size="wide">
         <div className="grid h-24 grid-cols-[1fr_auto] items-center gap-6 lg:h-28 lg:grid-cols-[auto_1fr_auto]">
           {/* Logo */}
@@ -279,7 +279,7 @@ export function SiteHeader({ lang }: { lang: Lang }) {
 
             <Link
               href={paths.contact[lang]}
-              className="hidden h-10 items-center gap-2 rounded-full bg-primary px-5 text-[0.8125rem] font-semibold text-primary-foreground transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#65171d] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring md:inline-flex lg:hidden xl:inline-flex"
+              className="hidden h-10 items-center gap-2 rounded-full bg-primary px-5 text-[0.8125rem] font-semibold text-primary-foreground transition-all duration-200 hover:-translate-y-0.5 hover:bg-copper-deep focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring md:inline-flex lg:hidden xl:inline-flex"
             >
               {nav[lang].find((item) => item.key === "contact")?.label}
             </Link>

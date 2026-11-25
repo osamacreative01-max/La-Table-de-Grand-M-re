@@ -49,7 +49,14 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Brand palette: burgundy, antique gold, cream and charcoal */
+  /* Brand palette from the logo: copper, forest green, gold, leaf, cream */
+  --color-copper: var(--copper);
+  --color-copper-deep: var(--copper-deep);
+  --color-copper-light: var(--copper-light);
+  --color-forest: var(--forest);
+  --color-forest-deep: var(--forest-deep);
+  --color-leaf: var(--leaf);
+  --color-gold-light: var(--gold-light);
   --color-tomato: var(--tomato);
   --color-olive: var(--olive);
   --color-mustard: var(--mustard);
@@ -85,83 +92,128 @@
 :root {
   --radius: 1rem;
 
-  /* Raw palette */
-  --cream: #faf5ea;
-  --sand: #efe4d0;
-  --tomato: #7c1d24;
+  /*
+   * Raw palette, sampled from the logo:
+   *   copper  – the wooden roundel ("naswari")
+   *   forest  – the dark nameplate, pushed slightly greener
+   *   gold    – the nameplate lettering and frame
+   *   leaf    – the cabbage
+   */
+  --copper: #8a5430;
+  --copper-deep: #6e4024;
+  --copper-light: #cfa379;
+  --forest: #26332a;
+  --forest-deep: #1c2620;
   --olive: #3c4a38;
-  --mustard: #c8a45c;
-  --gold: #c8a45c;
-  --gold-deep: #a17c34;
-  --ink-brown: #241b18;
-  --muted-brown: #6b5c4f;
-  --line: #e5d8c3;
+  --leaf: #5b6b40;
+  --gold: #c9b07a;
+  --gold-light: #dcc796;
+  --gold-deep: #a68c5c;
+  --cream: #fbf5ec;
+  --sand: #ead7bd;
+  --ink-brown: #2e1f15;
+  --muted-brown: #6a5240;
+  --line: #e0cbb0;
 
-  --background: var(--cream);
+  /* Kept for older class names */
+  --tomato: var(--copper);
+  --mustard: var(--gold);
+
+  /* Page: a light wash of the logo's copper */
+  --background: #f5eadb;
   --foreground: var(--ink-brown);
 
-  --card: #ffffff;
+  --card: var(--cream);
   --card-foreground: var(--ink-brown);
-  --popover: #ffffff;
+  --popover: var(--cream);
   --popover-foreground: var(--ink-brown);
 
-  --primary: var(--tomato);
-  --primary-foreground: #ffffff;
+  --primary: var(--copper);
+  --primary-foreground: var(--cream);
   --secondary: var(--sand);
   --secondary-foreground: var(--ink-brown);
 
-  --muted: #f2eadb;
+  --muted: #efe2cf;
   --muted-foreground: var(--muted-brown);
 
   --accent: var(--sand);
-  --accent-foreground: var(--olive);
+  --accent-foreground: var(--forest);
 
   --destructive: #a22c22;
   --border: var(--line);
   --input: var(--line);
-  --ring: var(--tomato);
+  --ring: var(--copper);
 
   /* Semantic brand tokens */
-  --brand: var(--tomato);
+  --brand: var(--copper);
   --brand-foreground: var(--ink-brown);
   --brand-soft: var(--sand);
 
-  /* Dark block used by the story band, business strip and footer */
-  --ink: #2b2118;
-  --ink-foreground: var(--cream);
+  /* Green block with gold lettering, like the logo's nameplate:
+     header, hero, ticker, business strip and footer */
+  --ink: var(--forest);
+  --ink-foreground: var(--gold-light);
+}
+
+/*
+ * Re-themes everything inside it as the logo's nameplate: forest green with
+ * gold lettering. Components keep using the normal tokens.
+ */
+.theme-forest {
+  --background: var(--forest);
+  --foreground: var(--gold-light);
+  --card: var(--forest-deep);
+  --card-foreground: var(--gold-light);
+  --popover: var(--forest-deep);
+  --popover-foreground: var(--gold-light);
+  --primary: var(--gold);
+  --primary-foreground: var(--forest-deep);
+  --secondary: #33432f;
+  --secondary-foreground: var(--gold-light);
+  --muted: #33432f;
+  --muted-foreground: #c4b48c;
+  --accent: #33432f;
+  --accent-foreground: var(--gold-light);
+  --border: rgb(220 199 150 / 22%);
+  --input: rgb(220 199 150 / 28%);
+  --ring: var(--gold);
+  --brand: var(--gold);
+  --brand-foreground: var(--gold-light);
+  --brand-soft: #33432f;
+  color: var(--foreground);
 }
 
 .dark {
-  --background: #1b1611;
-  --foreground: #f5ede0;
+  --background: #1a1410;
+  --foreground: #f3e8d6;
 
-  --card: #241e18;
-  --card-foreground: #f5ede0;
-  --popover: #241e18;
-  --popover-foreground: #f5ede0;
+  --card: #241b15;
+  --card-foreground: #f3e8d6;
+  --popover: #241b15;
+  --popover-foreground: #f3e8d6;
 
-  --primary: #c97068;
-  --primary-foreground: #1b1611;
-  --secondary: #33291f;
-  --secondary-foreground: #f5ede0;
+  --primary: var(--copper-light);
+  --primary-foreground: #1a1410;
+  --secondary: #33261c;
+  --secondary-foreground: #f3e8d6;
 
-  --muted: #2a231b;
-  --muted-foreground: #c9b9a6;
+  --muted: #2a2018;
+  --muted-foreground: #cdb9a0;
 
-  --accent: #3a2f24;
-  --accent-foreground: #f5ede0;
+  --accent: #33261c;
+  --accent-foreground: #f3e8d6;
 
   --destructive: #e06a5d;
   --border: rgb(255 255 255 / 14%);
   --input: rgb(255 255 255 / 18%);
-  --ring: var(--mustard);
+  --ring: var(--gold);
 
-  --brand: #c97068;
-  --brand-foreground: #f5ede0;
-  --brand-soft: #3a2f24;
+  --brand: var(--copper-light);
+  --brand-foreground: #f3e8d6;
+  --brand-soft: #33261c;
 
-  --ink: #14100c;
-  --ink-foreground: #f5ede0;
+  --ink: var(--forest-deep);
+  --ink-foreground: var(--gold-light);
 }
 
 @layer base {
@@ -212,11 +264,11 @@
     background: var(--cream);
   }
   ::-webkit-scrollbar-thumb {
-    background: #cbb99c;
+    background: var(--copper-light);
     border-radius: 4px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #b09a7b;
+    background: var(--copper);
   }
 }
 

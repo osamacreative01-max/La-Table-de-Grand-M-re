@@ -13,7 +13,7 @@ export function Carousel({
   label,
   previousLabel,
   nextLabel,
-  itemClassName = "w-[82%] sm:w-[46%] lg:w-[31.5%]",
+  itemClassName = "w-[82%] sm:w-[46%] lg:w-[31.5%] 2xl:w-[23.6%]",
   className,
 }: {
   children: React.ReactNode;
@@ -54,7 +54,7 @@ export function Carousel({
       <ul
         ref={track}
         onScroll={measure}
-        className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-5 px-5 pb-4 sm:-mx-8 sm:scroll-px-8 sm:px-8"
+        className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-5 px-5 pb-4 sm:-mx-8 sm:scroll-px-8 sm:px-8 lg:-mx-12 lg:scroll-px-12 lg:px-12 2xl:-mx-20 2xl:scroll-px-20 2xl:px-20"
       >
         {Children.map(children, (child) => (
           <li className={cn("shrink-0 snap-start", itemClassName)}>{child}</li>

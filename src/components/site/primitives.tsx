@@ -12,9 +12,11 @@ export function Container({
   return (
     <div
       className={cn(
-        "mx-auto w-full px-5 sm:px-8",
-        size === "default" && "max-w-6xl",
-        size === "wide" && "max-w-[1200px]",
+        "mx-auto w-full px-5 sm:px-8 lg:px-12 2xl:px-20",
+        // Wide sections fill the screen up to very large monitors (only the
+        // side padding remains); default sections stay a touch narrower.
+        size === "default" && "max-w-[1600px]",
+        size === "wide" && "max-w-[2000px]",
         size === "narrow" && "max-w-3xl",
         className,
       )}

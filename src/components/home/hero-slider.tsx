@@ -102,7 +102,7 @@ export function HeroSlider({
               initial={false}
               animate={{ opacity: isActive || index === previous ? 1 : 0 }}
               transition={{ duration: reduce || !isActive ? 0 : 1.1, ease }}
-              className={cn("absolute inset-0", isActive ? "z-10" : index === previous ? "z-[5]" : "z-0")}
+              className={cn("absolute inset-0", dark && "theme-forest", isActive ? "z-10" : index === previous ? "z-[5]" : "z-0")}
             >
               <motion.div
                 className="absolute inset-x-0 top-0 h-[54%] lg:inset-0 lg:h-full"
@@ -198,7 +198,7 @@ export function HeroSlider({
                         className={cn(
                           "inline-flex h-11 items-center rounded-full border px-5 sm:h-12 sm:px-7 text-sm font-semibold transition-all hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
                           dark
-                            ? "border-cream/50 text-cream hover:border-cream hover:bg-cream hover:text-ink"
+                            ? "border-gold-light/50 text-gold-light hover:border-gold-light hover:bg-gold-light hover:text-forest-deep"
                             : "border-foreground/30 text-foreground hover:border-foreground hover:bg-foreground hover:text-background",
                         )}
                       >
