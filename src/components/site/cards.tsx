@@ -148,7 +148,7 @@ export function ProductCard({
       )}
     >
       <div className="overflow-hidden">
-        {photo && product.lifestyle ? (
+        {product.lifestyle && (photo || !product.image) ? (
           <div className="relative aspect-[4/5] overflow-hidden bg-secondary">
             <Image
               src={product.lifestyle}

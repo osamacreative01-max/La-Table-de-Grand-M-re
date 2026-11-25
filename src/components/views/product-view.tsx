@@ -39,6 +39,10 @@ export function ProductView({
 
   const usedIn = recipesForProduct(product.key);
 
+  // Products without a packshot yet (rice, pasta) lead with their food photo instead.
+  const photoOnly = !product.image && Boolean(product.lifestyle);
+  const heroImage = product.image ?? product.lifestyle;
+
   const detailFields: { label: string; value: string }[] = [];
   if (product.format) {
     detailFields.push({ label: copy.formatLabel, value: product.format[lang] });
@@ -64,7 +68,7 @@ export function ProductView({
           description: product.description[lang],
           category: category.name[lang],
           url: absolute(url),
-          image: product.image ? absolute(product.image) : undefined,
+          image: heroImage ? absolute(heroImage) : undefined,
         })}
       />
 
@@ -88,9 +92,10 @@ export function ProductView({
                 style={{ transform: "rotate(1.5deg)" }}
               />
               <MediaFrame
-                src={product.image}
+                src={heroImage}
                 alt={product.name[lang]}
                 tone={product.tone}
+                imageClassName={photoOnly ? "object-cover p-0 drop-shadow-none" : undefined}
                 ratio="4/5"
                 rounded="rounded-[1.75rem]"
                 priority
@@ -131,7 +136,7 @@ export function ProductView({
                 </p>
               )}
 
-              {product.lifestyle && (
+              {product.lifestyle && !photoOnly && (
                 <div className="relative mt-6 aspect-[16/10] overflow-hidden rounded-2xl border border-border/70">
                   <Image
                     src={product.lifestyle}

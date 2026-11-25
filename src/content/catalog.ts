@@ -601,6 +601,7 @@ export const products: Product[] = [
       fr: "Un incontournable du garde-manger pour accompagner les plats en famille et cuisiner une foule de recettes.",
       en: "A pantry essential for family meals and countless everyday recipes.",
     },
+    lifestyle: "/images/product-rice.webp",
     tone: "linen",
   },
   {
@@ -612,6 +613,7 @@ export const products: Product[] = [
       fr: "Pour les soupers pressés, les repas en famille et les recettes que tout le monde aime retrouver.",
       en: "For busy weeknight dinners, family meals and the recipes everyone asks for again.",
     },
+    lifestyle: "/images/product-pasta.webp",
     tone: "honey",
   },
   {
