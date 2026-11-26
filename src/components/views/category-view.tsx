@@ -1,8 +1,8 @@
 import Link from "next/link";
+import { PageHero } from "@/components/site/page-hero";
 import { ArrowLeft } from "lucide-react";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { Container, Section } from "@/components/site/primitives";
-import { MediaFrame } from "@/components/site/media-frame";
 import { ProductCard } from "@/components/site/cards";
 import { JsonLd, breadcrumbSchema } from "@/components/site/json-ld";
 import { productsPage, ui } from "@/content/copy";
@@ -45,41 +45,19 @@ export function CategoryView({
         ]}
       />
 
-      <section className="relative overflow-hidden bg-grain-rich">
-        <div className="pointer-events-none absolute inset-0 bg-dots opacity-30" aria-hidden="true" />
-        <Container size="wide" className="relative grid items-center gap-10 py-14 md:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-          <div>
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-brand/40 bg-brand-soft/60 px-4 py-1.5 text-[0.68rem] font-medium uppercase tracking-[0.2em] text-brand-foreground/75">
-              <span aria-hidden="true" className="size-1.5 rounded-full bg-brand" />
-              {lang === "fr" ? "Gamme" : "Range"}
-            </div>
-            <h1 className="mt-5 max-w-3xl text-[2.2rem] leading-[1.05] tracking-[-0.02em] sm:text-4xl lg:text-5xl">
-              {category.name[lang]}
-            </h1>
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-[1.05rem]">
-              {category.intro[lang]}
-            </p>
-            <p className="mt-6 inline-flex items-center gap-2 text-sm text-muted-foreground">
-              <span className="font-heading text-xl text-foreground">{items.length}</span>
-              {lang === "fr" ? "produits dans cette gamme" : "products in this range"}
-            </p>
-          </div>
-
-          <div className="relative">
-            <MediaFrame
-              src={category.image}
-              alt={category.caption[lang]}
-              tone={category.tone}
-              ratio="4/3"
-              rounded="rounded-[1.75rem]"
-              priority
-              sizes="(min-width: 1024px) 40vw, 92vw"
-              className="relative shadow-[0_40px_80px_-48px_rgba(72,48,28,0.55)]"
-              
-            />
-          </div>
-        </Container>
-      </section>
+      <PageHero
+        eyebrow={lang === "fr" ? "Gamme" : "Range"}
+        title={category.name[lang]}
+        image={{ kind: "product", src: category.image, alt: category.caption[lang], tone: category.tone }}
+      >
+        <p>{category.intro[lang]}</p>
+        <p className="mt-6 inline-flex items-baseline gap-2">
+          <span className="font-heading text-[2.4rem] leading-none text-gold-light">{items.length}</span>
+          <span className="text-sm uppercase tracking-[0.14em]">
+            {lang === "fr" ? "Produits dans cette gamme" : "Products in This Range"}
+          </span>
+        </p>
+      </PageHero>
 
       <Section className="pt-8 md:pt-12">
         <Container size="wide">

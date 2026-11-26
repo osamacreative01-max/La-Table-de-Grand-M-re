@@ -42,6 +42,8 @@ const crops = [
   // Grand-maman, for the Our Story page: cooking with her granddaughters, and close up
   ["Our Story.jpg", "story-grandma-cooking", { left: 2300, top: 0, width: 1700, height: 1667 }],
   ["Our Story.jpg", "story-grandma-close", { left: 3150, top: 80, width: 850, height: 1100 }],
+  // The dishes half of the flat-lay (its right half fades to cream), for the business page
+  ["Random.jpg", "business-spread", { left: 0, top: 0, width: 1820, height: 1365 }],
   // Her portrait from the logo artwork (2048px source), without the nameplate
   ["../../../assets/brand/logo-source.png", "story-grandma-portrait", { left: 553, top: 236, width: 1024, height: 1000 }],
 ];

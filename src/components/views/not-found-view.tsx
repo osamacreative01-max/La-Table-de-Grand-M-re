@@ -18,9 +18,9 @@ const copy = {
     eyebrow: "Error 404",
     title: "This page is no longer on the table.",
     body: "The page you're looking for may have moved or doesn't exist. Head back home or browse our products and recipes.",
-    home: "Back to home",
-    products: "Our products",
-    recipes: "Our recipes",
+    home: "Back to Home",
+    products: "Our Products",
+    recipes: "Our Recipes",
   },
 } as const;
 

@@ -216,7 +216,7 @@ export function ProductView({
               <div>
                 <Eyebrow>{copy.relatedTitle}</Eyebrow>
                 <h2 className="mt-4 text-3xl leading-[1.08] sm:text-[2.2rem]">
-                  {lang === "fr" ? "À découvrir aussi." : "You may also like."}
+                  {lang === "fr" ? "À découvrir aussi." : "You May Also Like."}
                 </h2>
               </div>
               <Link

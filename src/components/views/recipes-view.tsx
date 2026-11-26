@@ -45,7 +45,7 @@ export function RecipesView({ lang }: { lang: Lang }) {
           <div className="max-w-xl">
             <div className="inline-flex items-center gap-2.5 rounded-full border border-brand/40 bg-brand-soft/60 px-4 py-1.5 text-[0.68rem] font-medium uppercase tracking-[0.2em] text-brand-foreground/75">
               <span aria-hidden="true" className="size-1.5 rounded-full bg-brand" />
-              {lang === "fr" ? "Idées repas" : "Meal ideas"}
+              {lang === "fr" ? "Idées repas" : "Meal Ideas"}
             </div>
             <h1 className="mt-5 text-[2.5rem] leading-[1.04] tracking-[-0.02em] sm:text-5xl lg:text-[3.5rem]">
               {copy.title}
@@ -78,7 +78,7 @@ export function RecipesView({ lang }: { lang: Lang }) {
           <div className="mb-8 flex items-end justify-between gap-4">
             <div>
               <p className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-brand-foreground/70">
-                {lang === "fr" ? "Le garde-manger" : "The pantry"}
+                {lang === "fr" ? "Le garde-manger" : "The Pantry"}
               </p>
               <h2 className="mt-3 text-2xl leading-snug sm:text-3xl">
                 {lang === "fr" ? "Les ingrédients de nos recettes" : "The ingredients behind our recipes"}

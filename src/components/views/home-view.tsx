@@ -77,7 +77,7 @@ function heroSlides(lang: Lang): HeroSlide[] {
     {
       image: "/images/hero-recipes.webp",
       alt: banner.recipesAlt,
-      eyebrow: lang === "fr" ? "Idées repas" : "Meal ideas",
+      eyebrow: lang === "fr" ? "Idées repas" : "Meal Ideas",
       title: recipesPage[lang].kicker,
       body: recipesPage[lang].intro,
       primary: { href: paths.recipes[lang], label: copy.recipes.cta },
@@ -109,7 +109,7 @@ export function HomeView({ lang }: { lang: Lang }) {
         <Container size="wide">
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionHeading
-              eyebrow={lang === "fr" ? "Le garde-manger" : "The pantry"}
+              eyebrow={lang === "fr" ? "Le garde-manger" : "The Pantry"}
               title={copy.collections.title}
               className="max-w-2xl"
             />
@@ -150,7 +150,7 @@ export function HomeView({ lang }: { lang: Lang }) {
       <Section tone="paper" className={cn(screen, "border-y border-border/60")}>
         <Container size="wide">
           <SectionHeading
-            eyebrow={lang === "fr" ? "Nos gammes" : "Our ranges"}
+            eyebrow={lang === "fr" ? "Nos gammes" : "Our Ranges"}
             title={lang === "fr" ? "Huit gammes pour le garde-manger." : "Eight Ranges for the Pantry."}
             className="max-w-2xl"
           />

@@ -53,7 +53,7 @@ export function StoryView({ lang }: { lang: Lang }) {
           <div className="max-w-xl">
             <div className="inline-flex items-center gap-2.5 rounded-full border border-brand/40 bg-brand-soft/60 px-4 py-1.5 text-[0.68rem] font-medium uppercase tracking-[0.2em] text-brand-foreground/75">
               <span aria-hidden="true" className="size-1.5 rounded-full bg-brand" />
-              {lang === "fr" ? "Depuis la cuisine" : "From the kitchen"}
+              {lang === "fr" ? "Depuis la cuisine" : "From the Kitchen"}
             </div>
             <h1 className="mt-6 text-[2.6rem] leading-[1.04] tracking-[-0.02em] sm:text-5xl lg:text-6xl">
               {copy.title}

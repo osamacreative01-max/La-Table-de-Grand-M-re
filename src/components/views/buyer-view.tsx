@@ -1,8 +1,8 @@
 import Link from "next/link";
+import { PageHero } from "@/components/site/page-hero";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { Container, Section } from "@/components/site/primitives";
-import { MediaFrame } from "@/components/site/media-frame";
 import { Button } from "@/components/ui/button";
 import { BusinessForm } from "@/components/forms/business-form";
 import { buyerPages, forms, businessPage, ui } from "@/content/copy";
@@ -39,57 +39,24 @@ export function BuyerView({ lang, page }: { lang: Lang; page: BuyerKey }) {
         ]}
       />
 
-      <section className="relative overflow-hidden bg-grain-rich">
-        <div className="pointer-events-none absolute inset-0 bg-dots opacity-30" aria-hidden="true" />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-20 -top-20 size-80 rounded-full"
-          style={{ background: "radial-gradient(circle, oklch(0.86 0.065 78 / 0.2), transparent 70%)" }}
-        />
-        <Container size="wide" className="relative py-14 md:py-20">
-          <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
-            <div className="max-w-xl">
-              <div className="inline-flex items-center gap-2.5 rounded-full border border-brand/40 bg-brand-soft/60 px-4 py-1.5 text-[0.68rem] font-medium uppercase tracking-[0.2em] text-brand-foreground/75">
-                <span aria-hidden="true" className="size-1.5 rounded-full bg-brand" />
-                {businessPage[lang].title}
-              </div>
-              <h1 className="mt-5 text-[2.2rem] leading-[1.05] tracking-[-0.02em] sm:text-4xl lg:text-5xl">
-                {copy.title}
-              </h1>
-              <p className="mt-5 font-heading text-xl leading-snug text-brand-foreground/80">
-                {copy.kicker}
-              </p>
-              <div className="mt-5 flex flex-col gap-4 text-base leading-relaxed text-muted-foreground">
-                {copy.paragraphs.map((paragraph) => (
-                  <p key={paragraph.slice(0, 32)}>{paragraph}</p>
-                ))}
-              </div>
-
-              <div className="mt-8">
-                <Button size="xl" nativeButton={false} render={<Link href="#enquiry" />}
-                  className="shadow-md shadow-primary/15">
-                  {copy.cta}
-                  <ArrowRight className="size-4" aria-hidden="true" />
-                </Button>
-              </div>
-            </div>
-
-            <div className="relative">
-              <MediaFrame
-                src={buyerImages[page]}
-                alt={copy.caption}
-                tone={tones[page]}
-                ratio="4/3"
-                rounded="rounded-[1.75rem]"
-                priority
-                sizes="(min-width: 1024px) 42vw, 92vw"
-                className="relative shadow-[0_32px_64px_-32px_rgba(72,48,28,0.55)]"
-                
-              />
-            </div>
-          </div>
-        </Container>
-      </section>
+      <PageHero
+        eyebrow={businessPage[lang].title}
+        title={copy.title}
+        kicker={copy.kicker}
+        image={{ kind: "product", src: buyerImages[page], alt: copy.caption, tone: tones[page] }}
+      >
+        <div className="flex flex-col gap-4">
+          {copy.paragraphs.map((paragraph) => (
+            <p key={paragraph.slice(0, 32)}>{paragraph}</p>
+          ))}
+        </div>
+        <div className="mt-8">
+          <Button size="xl" nativeButton={false} render={<Link href="#enquiry" />}>
+            {copy.cta}
+            <ArrowRight className="size-4" aria-hidden="true" />
+          </Button>
+        </div>
+      </PageHero>
 
       <Section
         id="enquiry"
