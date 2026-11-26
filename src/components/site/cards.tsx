@@ -29,7 +29,7 @@ export function CategoryCard({
       <Link
         href={href}
         className={cn(
-          "group grid overflow-hidden rounded-3xl border border-border/70 bg-card transition-all duration-300",
+          "group grid overflow-hidden rounded-3xl border border-border/70 bg-card transition-[transform,box-shadow,border-color] duration-300",
           "md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]",
           "hover:-translate-y-0.5 hover:border-brand/50 hover:shadow-[0_28px_60px_-30px_rgba(72,48,28,0.55)]",
           "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
@@ -76,7 +76,7 @@ export function CategoryCard({
     <Link
       href={href}
       className={cn(
-        "group flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card transition-all duration-300",
+        "group flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card transition-[transform,box-shadow,border-color] duration-300",
         "hover:-translate-y-1 hover:border-brand/50 hover:shadow-[0_24px_52px_-24px_rgba(72,48,28,0.5)]",
         "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
         className,
@@ -90,7 +90,7 @@ export function CategoryCard({
           ratio="4/3"
           rounded="rounded-none"
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          imageClassName="group-hover:scale-[1.04]"
+          imageClassName="group-hover:scale-[1.03]"
         />
       </div>
       <div className="flex flex-1 flex-col gap-3 p-6">
@@ -141,7 +141,7 @@ export function ProductCard({
     <Link
       href={href}
       className={cn(
-        "group flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card transition-all duration-300",
+        "group flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card transition-[transform,box-shadow,border-color] duration-300",
         "hover:-translate-y-1 hover:border-brand/50 hover:shadow-[0_24px_52px_-24px_rgba(72,48,28,0.5)]",
         "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
         className,
@@ -149,13 +149,13 @@ export function ProductCard({
     >
       <div className="overflow-hidden">
         {product.lifestyle && (photo || !product.image) ? (
-          <div className="relative aspect-[4/5] overflow-hidden bg-secondary">
+          <div className="relative aspect-square overflow-hidden bg-secondary">
             <Image
               src={product.lifestyle}
               alt={product.name[lang]}
               fill
               sizes="(min-width: 1024px) 25vw, (min-width: 640px) 45vw, 100vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+              className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
             />
           </div>
         ) : (
@@ -328,7 +328,7 @@ export function RecipeCard({
   );
 
   const shell =
-    "group flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card transition-all duration-300 hover:-translate-y-1 hover:border-brand/40 hover:shadow-[0_22px_48px_-22px_rgba(72,48,28,0.45)]";
+    "group flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-brand/40 hover:shadow-[0_22px_48px_-22px_rgba(72,48,28,0.45)]";
 
   if (href) {
     return (
@@ -364,7 +364,7 @@ export function BusinessCard({
     <Link
       href={href}
       className={cn(
-        "group relative flex h-full flex-col justify-between gap-8 overflow-hidden rounded-3xl border border-border/70 bg-card p-7 transition-all duration-300",
+        "group relative flex h-full flex-col justify-between gap-8 overflow-hidden rounded-3xl border border-border/70 bg-card p-7 transition-[transform,box-shadow,border-color] duration-300",
         "hover:-translate-y-1 hover:border-brand/60 hover:bg-brand-soft/30 hover:shadow-[0_22px_52px_-24px_rgba(72,48,28,0.5)]",
         "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
         className,
@@ -372,7 +372,7 @@ export function BusinessCard({
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute right-0 top-0 h-1 w-0 bg-brand transition-all duration-300 group-hover:w-full"
+        className="pointer-events-none absolute right-0 top-0 h-1 w-0 bg-brand transition-[transform,box-shadow,border-color] duration-300 group-hover:w-full"
       />
 
       <div className="flex flex-col gap-3.5">

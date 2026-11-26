@@ -12,11 +12,13 @@ export function Container({
   return (
     <div
       className={cn(
-        "mx-auto w-full px-5 sm:px-8 lg:px-12 2xl:px-20",
+        // The side margin comes from the box's own width (not padding), so the
+        // container's edges are exactly the content's edges.
+        "wrap mx-auto w-[calc(100%-40px)] sm:w-[calc(100%-64px)] lg:w-[calc(100%-128px)] 2xl:w-[calc(100%-160px)]",
         // Wide sections fill the screen up to very large monitors (only the
-        // side padding remains); default sections stay a touch narrower.
-        size === "default" && "max-w-[1600px]",
-        size === "wide" && "max-w-[2000px]",
+        // side margin remains); default sections stay a touch narrower.
+        size === "default" && "max-w-[1440px]",
+        size === "wide" && "max-w-[1840px]",
         size === "narrow" && "max-w-3xl",
         className,
       )}

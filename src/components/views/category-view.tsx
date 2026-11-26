@@ -66,11 +66,6 @@ export function CategoryView({
           </div>
 
           <div className="relative">
-            <div
-              aria-hidden="true"
-              className="absolute -inset-3 rounded-[2rem] border border-brand/15"
-              style={{ transform: "rotate(1.5deg)" }}
-            />
             <MediaFrame
               src={category.image}
               alt={category.caption[lang]}

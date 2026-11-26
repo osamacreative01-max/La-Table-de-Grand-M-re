@@ -210,7 +210,7 @@ export const recipes: Recipe[] = [
       fr: "Rôtie au beurre d'arachide et banane",
       en: "Peanut butter toast with banana",
     },
-    photo: "/images/lifestyle-peanut-butter.webp",
+    photo: "/images/dish-peanut-butter-toast.webp",
     prepMinutes: 5,
     cookMinutes: 2,
     servings: 2,

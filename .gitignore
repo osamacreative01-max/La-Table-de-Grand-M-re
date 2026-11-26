@@ -55,3 +55,6 @@ next-env.d.ts
 
 # raw client website material — optimised copies live in public/images
 /public/Website Material (1)/
+
+# taste-skill checker state and Chrome profiles
+/.taste-skill/

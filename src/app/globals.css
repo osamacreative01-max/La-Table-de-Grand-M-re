@@ -20,10 +20,6 @@
   0%, 100% { transform: translateY(0px); }
   50%       { transform: translateY(-6px); }
 }
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
 @keyframes shimmer {
   from { background-position: -200% center; }
   to   { background-position: 200% center; }
@@ -112,7 +108,7 @@
   --cream: #fbf5ec;
   --sand: #ead7bd;
   --ink-brown: #2e1f15;
-  --muted-brown: #6a5240;
+  --muted-brown: #5a4333;
   --line: #e0cbb0;
 
   /* Kept for older class names */
@@ -171,7 +167,7 @@
   --secondary: #33432f;
   --secondary-foreground: var(--gold-light);
   --muted: #33432f;
-  --muted-foreground: #c4b48c;
+  --muted-foreground: #d6c79f;
   --accent: #33432f;
   --accent-foreground: var(--gold-light);
   --border: rgb(220 199 150 / 22%);
@@ -223,7 +219,8 @@
 
   html {
     @apply font-sans;
-    scroll-behavior: smooth;
+    /* Keep anchors and keyboard focus clear of the fixed header */
+    scroll-padding-top: 8rem;
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -313,14 +310,6 @@
 @utility animate-delay-400 { animation-delay: 400ms; }
 @utility animate-delay-500 { animation-delay: 500ms; }
 
-/* Category ticker on the home page: two identical rows scroll by half their width. */
-@utility marquee {
-  animation: marquee 48s linear infinite;
-
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-  }
-}
 
 /* Google Translate: keep the machine translation invisible except the text it rewrites */
 #google_translate_element,

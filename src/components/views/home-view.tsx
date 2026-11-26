@@ -1,17 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Leaf, ShoppingBag, Users } from "lucide-react";
-import { CategoryMarquee } from "@/components/home/category-marquee";
 import { HeroSlider, type HeroSlide } from "@/components/home/hero-slider";
-import { Carousel } from "@/components/motion/carousel";
-import { Reveal } from "@/components/motion/reveal";
-import { CategoryCard, ProductCard, RecipeCard } from "@/components/site/cards";
+import { MediaFrame } from "@/components/site/media-frame";
+import { ProductCard, RecipeCard } from "@/components/site/cards";
 import { Container, Eyebrow, Section, SectionHeading } from "@/components/site/primitives";
 import { Button } from "@/components/ui/button";
 import { categories, products } from "@/content/catalog";
 import { banners, businessSubnav, home, recipesPage, ui } from "@/content/copy";
 import { recipes } from "@/content/recipes";
 import { recipeCardProps } from "@/lib/recipes";
+import { cn } from "@/lib/utils";
 import { categoryPath, paths, productPath } from "@/lib/routes";
 import type { Lang } from "@/content/types";
 
@@ -60,7 +59,6 @@ function heroSlides(lang: Lang): HeroSlide[] {
       title: copy.hero.title,
       body: copy.hero.body,
       primary: { href: paths.products[lang], label: copy.hero.cta },
-      secondary: { href: paths.story[lang], label: lang === "fr" ? "Notre histoire" : "Our Story" },
       theme: "dark",
       align: "left",
       focus: "70% center",
@@ -72,7 +70,6 @@ function heroSlides(lang: Lang): HeroSlide[] {
       title: banner.rangeTitle,
       body: banner.rangeBody,
       primary: { href: paths.products[lang], label: banner.rangeCta },
-      secondary: { href: paths.business[lang], label: ui[lang].business },
       theme: "dark",
       align: "left",
       focus: "80% center",
@@ -91,6 +88,9 @@ function heroSlides(lang: Lang): HeroSlide[] {
   ];
 }
 
+/** Every section after the hero fills exactly one screen on a desktop. */
+const screen = "flex min-h-svh flex-col justify-center";
+
 export function HomeView({ lang }: { lang: Lang }) {
   const copy = home[lang];
   const t = ui[lang];
@@ -99,28 +99,18 @@ export function HomeView({ lang }: { lang: Lang }) {
     .map((key) => products.find((product) => product.key === key))
     .filter((product): product is NonNullable<typeof product> => Boolean(product));
 
-  const stats = [
-    { value: categories.length, label: lang === "fr" ? "gammes" : "ranges" },
-    { value: products.length, label: lang === "fr" ? "produits" : "products" },
-    { value: recipes.length, label: lang === "fr" ? "recettes" : "recipes" },
-  ];
-
   return (
     <main id="main">
       {/* ── A — HERO SLIDER ───────────────────────────────────────── */}
       <HeroSlider slides={heroSlides(lang)} labels={labels} />
 
-      {/* ── A2 — RANGES TICKER ────────────────────────────────────── */}
-      <CategoryMarquee lang={lang} />
-
       {/* ── B — PANTRY FAVOURITES ─────────────────────────────────── */}
-      <Section tone="card">
+      <Section tone="card" className={screen}>
         <Container size="wide">
-          <Reveal className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionHeading
               eyebrow={lang === "fr" ? "Le garde-manger" : "The pantry"}
               title={copy.collections.title}
-              body={copy.collections.body}
               className="max-w-2xl"
             />
             <Button
@@ -133,14 +123,14 @@ export function HomeView({ lang }: { lang: Lang }) {
               {copy.collections.cta}
               <ArrowRight className="size-4" aria-hidden="true" />
             </Button>
-          </Reveal>
+          </div>
 
-          <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {featured.map((product, index) => {
+          <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {featured.map((product) => {
               const category = categories.find((item) => item.key === product.category);
               if (!category) return null;
               return (
-                <Reveal as="li" key={product.key} delay={index * 0.08}>
+                <li key={product.key}>
                   <ProductCard
                     product={product}
                     lang={lang}
@@ -149,98 +139,66 @@ export function HomeView({ lang }: { lang: Lang }) {
                     eyebrow={category.name[lang]}
                     photo
                   />
-                </Reveal>
+                </li>
               );
             })}
           </ul>
-
-          <Reveal className="mt-12 grid grid-cols-3 divide-x divide-border/70 rounded-2xl border border-border/60 bg-background/60 py-6 text-center">
-            {stats.map((stat) => (
-              <p key={stat.label} className="px-3">
-                <span className="block font-heading text-3xl text-foreground sm:text-4xl">
-                  {stat.value}
-                </span>
-                <span className="mt-1 block text-[0.7rem] font-medium uppercase tracking-[0.16em] text-muted-foreground">
-                  {stat.label}
-                </span>
-              </p>
-            ))}
-          </Reveal>
         </Container>
       </Section>
 
-      {/* ── B2 — RANGES CAROUSEL ──────────────────────────────────── */}
-      <Section tone="paper" className="border-y border-border/60">
+      {/* ── C — THE EIGHT RANGES ──────────────────────────────────── */}
+      <Section tone="paper" className={cn(screen, "border-y border-border/60")}>
         <Container size="wide">
-          <Reveal>
-            <SectionHeading
-              eyebrow={lang === "fr" ? "Nos gammes" : "Our ranges"}
-              title={lang === "fr" ? "Un garde-manger complet." : "A complete pantry."}
-              body={
-                lang === "fr"
-                  ? "Huit gammes pour cuisiner au quotidien, des fruits du déjeuner aux nouilles du souper."
-                  : "Eight ranges for everyday cooking, from breakfast fruit to dinnertime noodles."
-              }
-              className="max-w-2xl"
-            />
-          </Reveal>
-          <Reveal className="mt-12">
-            <Carousel
-              label={lang === "fr" ? "Gammes de produits" : "Product ranges"}
-              previousLabel={labels.previous}
-              nextLabel={labels.next}
-            >
-              {categories.map((category, index) => (
-                <CategoryCard
-                  key={category.key}
-                  category={category}
+          <SectionHeading
+            eyebrow={lang === "fr" ? "Nos gammes" : "Our ranges"}
+            title={lang === "fr" ? "Huit gammes pour le garde-manger." : "Eight Ranges for the Pantry."}
+            className="max-w-2xl"
+          />
+          <ul className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-5">
+            {categories.map((category) => (
+              <li key={category.key}>
+                <Link
                   href={categoryPath(lang, category.slug[lang])}
-                  lang={lang}
-                  label={t.seeProducts}
-                  index={index}
-                />
-              ))}
-            </Carousel>
-          </Reveal>
+                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/70 bg-card transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-0.5 hover:border-brand/50 hover:shadow-[0_18px_40px_-24px_rgba(46,31,21,0.5)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                >
+                  <MediaFrame
+                    src={category.image}
+                    alt={category.caption[lang]}
+                    tone={category.tone}
+                    ratio="16/9"
+                    rounded="rounded-none"
+                    sizes="(min-width: 1024px) 23vw, 46vw"
+                    imageClassName="group-hover:scale-[1.03]"
+                  />
+                  <span className="flex flex-1 items-center justify-between gap-3 px-4 py-3.5">
+                    <span className="font-heading text-[1.05rem] leading-snug transition-colors group-hover:text-brand-foreground">
+                      {category.name[lang]}
+                    </span>
+                    <ArrowRight
+                      className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-foreground"
+                      aria-hidden="true"
+                    />
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </Container>
       </Section>
 
-      {/* ── C — BRAND STORY (logo nameplate colours) ─────────────── */}
-      <Section className="theme-forest bg-background">
-
+      {/* ── D — BRAND STORY (logo nameplate colours) ─────────────── */}
+      <Section className={cn(screen, "theme-forest bg-background")}>
         <Container size="wide">
-          <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
-            <Reveal className="relative">
-              <div
-                aria-hidden="true"
-                className="absolute -inset-3 rounded-[2rem] border border-brand/20"
-                style={{ transform: "rotate(-1.5deg)" }}
-              />
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] shadow-[0_48px_96px_-50px_rgba(72,48,28,0.55)]">
-                <Image
-                  src="/images/hero-our-story.webp"
-                  alt={banners[lang].storyAlt}
-                  fill
-                  sizes="(min-width: 1024px) 52vw, 92vw"
-                  className="object-cover object-[80%_center]"
-                />
-              </div>
-              <blockquote className="absolute -bottom-6 left-6 max-w-[15rem] rounded-2xl border border-brand/30 bg-card/95 px-5 py-4 shadow-xl backdrop-blur-sm">
-                <p className="font-heading text-base leading-snug text-brand-foreground">
-                  {lang === "fr" ? "« Viens t'asseoir, c'est prêt! »" : "“Come sit down, it's ready!”"}
-                </p>
-              </blockquote>
-            </Reveal>
-
-            <Reveal className="max-w-lg pt-4 lg:pt-0" delay={0.1}>
+          <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-6">
+            <div className="lg:pr-16">
               <Eyebrow>{lang === "fr" ? "Notre histoire" : "Our Story"}</Eyebrow>
               <h2 className="mt-5 text-3xl leading-[1.08] sm:text-[2.6rem]">{copy.story.title}</h2>
               <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-[1.05rem]">
                 {copy.story.body}
               </p>
-              <p className="mt-6 border-l-4 border-brand pl-5 font-heading text-lg italic leading-snug text-foreground/85">
-                {lang === "fr" ? "Le goût de se retrouver." : "The Taste of Coming Together."}
-              </p>
+              <blockquote className="mt-7 border-t border-border pt-6 font-heading text-2xl italic leading-snug text-foreground">
+                {lang === "fr" ? "« Viens t'asseoir, c'est prêt! »" : "“Come sit down, it's ready!”"}
+              </blockquote>
               <Button
                 size="lg"
                 nativeButton={false}
@@ -250,15 +208,24 @@ export function HomeView({ lang }: { lang: Lang }) {
                 {copy.story.cta}
                 <ArrowRight className="size-4" aria-hidden="true" />
               </Button>
-            </Reveal>
+            </div>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem]">
+              <Image
+                src="/images/hero-our-story.webp"
+                alt={banners[lang].storyAlt}
+                fill
+                sizes="(min-width: 1024px) 46vw, 92vw"
+                className="object-cover object-[80%_center]"
+              />
+            </div>
           </div>
         </Container>
       </Section>
 
-      {/* ── D — RECIPES CAROUSEL ──────────────────────────────────── */}
-      <Section tone="card" className="border-y border-border/60">
+      {/* ── E — RECIPES ───────────────────────────────────────────── */}
+      <Section tone="card" className={screen}>
         <Container size="wide">
-          <Reveal className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionHeading
               eyebrow={lang === "fr" ? "Recettes" : "Recipes"}
               title={copy.recipes.title}
@@ -275,84 +242,75 @@ export function HomeView({ lang }: { lang: Lang }) {
               {copy.recipes.cta}
               <ArrowRight className="size-4" aria-hidden="true" />
             </Button>
-          </Reveal>
-          <Reveal className="mt-12">
-            <Carousel
-              label={lang === "fr" ? "Recettes" : "Recipes"}
-              previousLabel={labels.previous}
-              nextLabel={labels.next}
-            >
-              {recipes.map((recipe, index) => (
-                <RecipeCard key={recipe.key} {...recipeCardProps(recipe, lang, index)} />
-              ))}
-            </Carousel>
-          </Reveal>
+          </div>
+          <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 [&>li:nth-child(3)]:hidden lg:[&>li:nth-child(3)]:block">
+            {recipes.slice(0, 3).map((recipe, index) => (
+              <li key={recipe.key}>
+                <RecipeCard {...recipeCardProps(recipe, lang, index)} />
+              </li>
+            ))}
+          </ul>
         </Container>
       </Section>
 
-      {/* ── E — BUSINESS STRIP ────────────────────────────────────── */}
-      <section className="relative isolate overflow-hidden bg-ink py-16 text-ink-foreground md:py-24">
+      {/* ── F — BUSINESS ──────────────────────────────────────────── */}
+      <Section className={cn(screen, "theme-forest relative isolate overflow-hidden bg-background")}>
         <Image
           src="/images/banner-product-range.webp"
           alt=""
+          aria-hidden="true"
           fill
           sizes="100vw"
-          className="-z-20 object-cover object-[85%_center] opacity-35"
+          className="z-0 object-cover object-[85%_center] opacity-15"
         />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,var(--ink)_20%,color-mix(in_oklab,var(--ink)_70%,transparent)_100%)]"
-        />
-        <Container size="wide">
-          <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-            <Reveal>
-              <Eyebrow tone="light">{lang === "fr" ? "Professionnels" : "Business"}</Eyebrow>
-              <h2 className="mt-5 text-3xl leading-[1.08] text-ink-foreground sm:text-4xl lg:text-[2.7rem]">
+        <Container size="wide" className="relative z-10">
+          <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-6">
+            <div className="lg:pr-16">
+              <Eyebrow>{lang === "fr" ? "Professionnels" : "Business"}</Eyebrow>
+              <h2 className="mt-5 text-3xl leading-[1.08] sm:text-4xl lg:text-[2.7rem]">
                 {copy.business.title}
               </h2>
-              <p className="mt-5 max-w-lg text-base leading-relaxed text-ink-foreground/75 sm:text-[1.05rem]">
+              <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-[1.05rem]">
                 {copy.business.body}
               </p>
               <Button
-                size="xl"
-                className="mt-8 border border-ink-foreground/20 bg-ink-foreground text-ink shadow-lg shadow-black/25 hover:bg-ink-foreground/92"
+                size="lg"
+                className="mt-8"
                 nativeButton={false}
                 render={<Link href={paths.business[lang]} />}
               >
                 {copy.business.cta}
                 <ArrowRight className="size-4" aria-hidden="true" />
               </Button>
-            </Reveal>
+            </div>
 
-            <ul className="flex flex-col gap-3">
+            <ul className="flex flex-col border-t border-border">
               {businessSubnav[lang].map((child, index) => {
                 const Icon = businessIcons[index];
                 return (
-                  <Reveal as="li" key={child.key} delay={index * 0.08}>
+                  <li key={child.key} className="border-b border-border">
                     <Link
                       href={subHref[child.key][lang]}
-                      className="group flex items-center justify-between gap-4 rounded-2xl border border-ink-foreground/15 bg-ink/60 px-5 py-4 backdrop-blur-sm transition-all hover:border-ink-foreground/35 hover:bg-ink-foreground/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                      className="group flex items-center justify-between gap-4 py-5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                     >
                       <span className="flex items-center gap-3.5">
-                        <span className="flex size-9 shrink-0 items-center justify-center rounded-xl border border-ink-foreground/20 bg-ink-foreground/10">
-                          <Icon className="size-4 text-ink-foreground/70" aria-hidden="true" />
-                        </span>
-                        <span className="text-sm font-medium text-ink-foreground/85 group-hover:text-ink-foreground">
+                        <Icon className="size-5 text-primary" aria-hidden="true" />
+                        <span className="text-base font-medium text-foreground underline-offset-4 group-hover:underline">
                           {child.label}
                         </span>
                       </span>
                       <ArrowRight
-                        className="size-4 shrink-0 text-ink-foreground/40 transition-transform group-hover:translate-x-0.5 group-hover:text-ink-foreground/70"
+                        className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-foreground"
                         aria-hidden="true"
                       />
                     </Link>
-                  </Reveal>
+                  </li>
                 );
               })}
             </ul>
           </div>
         </Container>
-      </section>
+      </Section>
     </main>
   );
 }

@@ -16,15 +16,9 @@ export const viewport: Viewport = {
 export default function FrenchLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr-CA" className={`${fraunces.variable} ${inter.variable}`}>
-      <body className="flex min-h-dvh flex-col">
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground"
-        >
-          Aller au contenu
-        </a>
+      <body className="flex min-h-dvh flex-col pt-[97px] lg:pt-[113px]">
         <SiteHeader lang="fr" />
-        <div className="flex flex-1 flex-col">{children}</div>
+        {children}
         <SiteFooter lang="fr" />
         <JsonLd data={organizationSchema("fr")} />
         <JsonLd data={websiteSchema("fr")} />

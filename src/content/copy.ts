@@ -107,12 +107,12 @@ export const home = {
   fr: {
     eyebrow: "Le goût de se retrouver",
     hero: {
-      title: "Les bons moments commencent autour de la table.",
+      title: "Des aliments de garde-manger pour les bons moments à table.",
       body: "Des fruits et légumes en conserve aux légumineuses, en passant par les poissons, les nouilles et les tartinades : de quoi inspirer les repas du quotidien.",
       cta: "Découvrir nos produits",
     },
     collections: {
-      title: "Des essentiels pour chaque repas.",
+      title: "Nos incontournables du garde-manger.",
       body: "Huit gammes pensées pour le garde-manger : fruits et légumes, haricots, légumineuses sèches, riz et nouilles, poissons et fruits de mer, viandes à lunch et beurre d'arachide.",
       cta: "Explorer nos produits",
     },
@@ -122,7 +122,7 @@ export const home = {
       cta: "Notre histoire",
     },
     recipes: {
-      title: "Qu'est-ce qu'on mange ce soir?",
+      title: "Des recettes pour ce soir.",
       body: "De bonnes idées pour cuisiner simplement avec les ingrédients du garde-manger.",
       cta: "Voir les recettes",
     },
@@ -135,12 +135,12 @@ export const home = {
   en: {
     eyebrow: "The Taste of Coming Together",
     hero: {
-      title: "The Best Moments Begin Around the Table.",
+      title: "Pantry Foods for the Best Moments at the Table.",
       body: "From canned fruit and vegetables to pulses, seafood, noodles and spreads: everyday inspiration for the meals you share.",
       cta: "Discover Our Products",
     },
     collections: {
-      title: "Everyday Essentials for Every Meal.",
+      title: "Pantry Favourites from Our Ranges.",
       body: "Eight pantry ranges: fruit and vegetables, beans, dried pulses, rice and noodles, seafood, luncheon meats and peanut butter.",
       cta: "Explore Our Products",
     },
@@ -150,7 +150,7 @@ export const home = {
       cta: "Our Story",
     },
     recipes: {
-      title: "What's for Dinner Tonight?",
+      title: "Recipes for Tonight.",
       body: "Easy meal inspiration using everyday pantry ingredients.",
       cta: "See Recipes",
     },

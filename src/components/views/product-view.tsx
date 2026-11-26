@@ -85,12 +85,7 @@ export function ProductView({
       <Section className="pt-10 md:pt-16">
         <Container size="wide">
           <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
-            <div className="relative">
-              <div
-                aria-hidden="true"
-                className="absolute -inset-3 rounded-[2rem] border border-brand/15"
-                style={{ transform: "rotate(1.5deg)" }}
-              />
+            <div className="relative">
               <MediaFrame
                 src={heroImage}
                 alt={product.name[lang]}

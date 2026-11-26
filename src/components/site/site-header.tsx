@@ -245,8 +245,14 @@ export function SiteHeader({ lang }: { lang: Lang }) {
   }, [open]);
 
   return (
-    <header className="theme-forest sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-md">
+    <header className="nav theme-forest fixed inset-x-0 top-0 z-40 border-b border-border bg-background/95 backdrop-blur-md">
       <Container size="wide">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground"
+        >
+          {t.skip}
+        </a>
         <div className="grid h-24 grid-cols-[1fr_auto] items-center gap-6 lg:h-28 lg:grid-cols-[auto_1fr_auto]">
           {/* Logo */}
           <Link

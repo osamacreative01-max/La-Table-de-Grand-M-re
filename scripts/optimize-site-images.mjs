@@ -17,7 +17,8 @@ const OUTPUT_DIR = "public/images";
 /** source file -> [output name, max width] */
 const jobs = [
   ["Home Page.jpg", "hero-family-table", 2400],
-  ["Home page banner k neech Ya jagan acha lage.jpg", "banner-product-range", 2400],
+  // Shown up to ~1.4x the screen width when cropped to cover, so keep the full source width.
+  ["Home page banner k neech Ya jagan acha lage.jpg", "banner-product-range", 4000],
   ["Our Story.jpg", "hero-our-story", 2400],
   ["Random.jpg", "hero-recipes", 2400],
   ["Asset 24@4x-100.jpg", "lifestyle-peanut-butter", 900],
@@ -36,6 +37,8 @@ const crops = [
   ["Random.jpg", "dish-tuna-toast", { left: 300, top: 560, width: 640, height: 640 }],
   ["Random.jpg", "dish-luncheon-potatoes", { left: 860, top: 120, width: 600, height: 600 }],
   ["Random.jpg", "dish-pineapple-chunks", { left: 0, top: 0, width: 900, height: 900 }],
+  // The toast alone, for the peanut butter recipe (the full shot is the product card's)
+  ["Asset 24@4x-100.jpg", "dish-peanut-butter-toast", { left: 440, top: 600, width: 652, height: 489 }],
 ];
 
 await mkdir(OUTPUT_DIR, { recursive: true });

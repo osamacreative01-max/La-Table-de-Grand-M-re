@@ -95,12 +95,7 @@ export function RecipeView({ lang, recipe }: { lang: Lang; recipe: Recipe }) {
               </dl>
             </div>
 
-            <div className="relative">
-              <div
-                aria-hidden="true"
-                className="absolute -inset-3 rounded-[2rem] border border-brand/15"
-                style={{ transform: "rotate(-1.5deg)" }}
-              />
+            <div className="relative">
               <MediaFrame
                 src={recipe.photo ?? main?.image}
                 alt={recipe.photo || !main ? recipe.caption[lang] : main.name[lang]}

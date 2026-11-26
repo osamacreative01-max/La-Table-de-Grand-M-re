@@ -75,11 +75,6 @@ export function BuyerView({ lang, page }: { lang: Lang; page: BuyerKey }) {
             </div>
 
             <div className="relative">
-              <div
-                aria-hidden="true"
-                className="absolute -inset-3 rounded-3xl border border-brand/15"
-                style={{ transform: "rotate(1.5deg)" }}
-              />
               <MediaFrame
                 src={buyerImages[page]}
                 alt={copy.caption}
