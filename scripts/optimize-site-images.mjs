@@ -39,6 +39,11 @@ const crops = [
   ["Random.jpg", "dish-pineapple-chunks", { left: 0, top: 0, width: 900, height: 900 }],
   // The toast alone, for the peanut butter recipe (the full shot is the product card's)
   ["Asset 24@4x-100.jpg", "dish-peanut-butter-toast", { left: 440, top: 600, width: 652, height: 489 }],
+  // Grand-maman, for the Our Story page: cooking with her granddaughters, and close up
+  ["Our Story.jpg", "story-grandma-cooking", { left: 2300, top: 0, width: 1700, height: 1667 }],
+  ["Our Story.jpg", "story-grandma-close", { left: 3150, top: 80, width: 850, height: 1100 }],
+  // Her portrait from the logo artwork (2048px source), without the nameplate
+  ["../../../assets/brand/logo-source.png", "story-grandma-portrait", { left: 553, top: 236, width: 1024, height: 1000 }],
 ];
 
 await mkdir(OUTPUT_DIR, { recursive: true });
